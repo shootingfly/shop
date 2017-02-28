@@ -1,0 +1,20 @@
+name: shop
+version: 0.1.0
+
+authors:
+  - shootingfly <790174750@qq.com>
+
+targets:
+  shop:
+    main: src/shop.cr
+
+crystal: 0.20.5
+
+license: MIT
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    branch: master
+  mysql:
+    github: crystal-lang/crystal-mysql
