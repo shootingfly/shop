@@ -1,0 +1,17 @@
+name: orm
+version: 0.1.0
+
+authors:
+  -  <>
+
+targets:
+  orm:
+    main: src/orm.cr
+
+crystal: 0.20.5
+
+license: MIT
+
+dependencies:
+  mysql:
+    github: crystal-lang/crystal-mysql
