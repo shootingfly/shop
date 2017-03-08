@@ -1,0 +1,18 @@
+<% products.each do |product| %>
+	<div class="col-sm-2">
+		<div class="bs-component">
+			<div class="card" style="box-shadow: none;">
+				<div class="card-image">
+					<span class="label  label-ribbon-left"><%= product.sale %></span>
+					<img src="/image/1.jpg">
+				</div>
+				<div class="card-content" style="border-top: none">
+					<a class="card-header text-center"><%= product.name %></a>
+					<div class="card-extra card-content" style="border-top: none">
+						<div class="card-description text-danger"><h4>$ <%= product.price %><a  href="/cart/add/<%= product.id %>" class="btn btn-circular btn-warning"><i class="fa fa-shopping-cart"></i></a></h4></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

@@ -1,20 +1,11 @@
-## Migrate database and run specs
-##   $ make all
-## Migrate database only
-##   $ make migrate
-## Runs specs only
-##   $ make spec
 app:
 	crystal src/main.cr
 migrate:
-	#mysql -q < sql/001.sql
-	crystal src/migrate.cr
-insert:
-	mysql -q < sql/insert.sql
-spec:
-	crystal spec
+	crystal src/Tasks/migrate_model.cr
+admin:
+	crystal src/Tasks/generate_admin.cr
 test:
-	@mysql -e "use shop; $(shell cat sql/test.sql)"
-all: migrate spec app
+	crystal src/Tasks/add_testdata.cr
+all: migrate test admin app
 
-.PHONY: migrate spec all
+.PHONY: migrate all
