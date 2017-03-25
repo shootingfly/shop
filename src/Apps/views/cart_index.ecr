@@ -1,0 +1,32 @@
+<h1>购物车</h1>
+<table class="table table-bordered table-stripped table-hover">
+	<thead>
+		<th>商品</th>
+		<th>单价</th>
+		<th>数量</th>
+		<th>小计</th>
+		<th>操作</th>
+	</thead>
+	<tbody>
+		<% products.not_nil!.each_with_index do |product, i| %>
+		<tr>
+			<td><%= product.name %></td>
+			<td><%= product.price %></td>
+			<td><%= carts[i].number %></td>
+			<td><%= carts[i].number * product.price %></td>
+			<td><a href="/carts/delete/<%= carts[i].id %>"></a></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td>【京东超市】绿箭（DOUBLEMINT）无糖薄荷糖原味薄荷味35粒23.8g单盒</td>
+			<td>￥7.9</td>
+			<td> 1 </td>
+			<td> ￥ 7.9 </td>
+			<td>删除</td>
+		</tr>
+	</tbody>
+</table>
+<form action="/newOrder" method="post" >
+	<input type="hidden" name="id" value="1" />
+	<input type="submit" class="btn btn-success pull-right" value="提交订单">
+</form>

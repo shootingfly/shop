@@ -1,22 +1,24 @@
 macro login?
-  env.session.int?("token")
+  env.session.string?("auth_token") || env.request.cookies["auth_token"]?
 end
 
 def cart_count
   Cart.get_num("select sum(number) from Cart where user_id = 1").to_s[0...-2]
 end
 
-def login(env)
-  if login?
-    yield
-  else
+macro do_login_before!
+  unless current_user
     env.redirect "/login"
   end
 end
 
 macro current_user
-  env.session.int?("token")
+  env.session.string?("auth_token") || env.request.cookies["auth_token"]?
 end
+
+# macro current_user
+#   1 || env.session.string?("auth_token")
+# end
 
 def generate_token
   "hello"

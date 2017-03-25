@@ -9,8 +9,4 @@ require "./Apps/controllers/*"
 require "./Admins/helper"
 require "./Admins/controllers/*"
 
-get "/" do |env|
-  view "main/home", "主页"
-end
-
 Kemal.run

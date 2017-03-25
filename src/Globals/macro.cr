@@ -11,9 +11,11 @@ macro admin_view(filename, title, flash = "")
 end
 
 macro redirect_back(location = "")
-	{% if location == "" %}
+	if env.request.headers["Referer"]?
+		puts "heelo"
 		env.redirect env.request.headers["Referer"]
-	{% else %}
+	else
+		puts "ss"
 		env.redirect {{location}}
-	{% end %}
+	end
 end

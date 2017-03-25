@@ -1,0 +1,29 @@
+<% products.each do |product| %>
+<div class="col-sm-3">
+	<div class="thumbnail">
+		<img alt="最后幸存者" src="/image/1.jpg" width="150" height="150" />
+		<div class="caption">
+			<h4><%= product.name %></h4>
+			<span class="text-danger">¥<%= product.price %></span>
+			<button  type="button" class="btn btn-danger pull-right add_cart" value="<%= product.id %>">
+			      	<i class="fa fa-shopping-cart"></i>
+			</button>
+		 </div>
+	</div>
+</div>
+<h4 id="result"></h4>
+<% end %>
+<script type="text/javascript">
+	$(".add_cart").click(function() {
+		<% if current_user %>
+			$.post("/cart/add", {
+				product_id : $(this).val()
+			}, function(data,textStatus){
+				$("#result").html(data);
+			}, "html");
+		<% else %>
+			$("#result").html("login");
+		<% end %>
+	});
+
+</script>

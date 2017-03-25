@@ -1,6 +1,6 @@
 macro table(kclass, **names)
 	class {{kclass.id}}
-		@@table_name = "{{kclass}}"
+		@@table_name = "`{{kclass}}`"
 
 		def self.table_name= (value)
 			@@table_name = value
@@ -21,10 +21,10 @@ macro table(kclass, **names)
 			exec "drop table if exists #{@@table_name}"
 		end
 
-		def self.create(exec? = true)
-			drop
+		def self.create(exec? = true, drop? = false)
+			drop if drop?
 			sql =<<-END
-			create table `#{@@table_name}` (
+			create table if not exists #{@@table_name} (
 				`id` int not null auto_increment primary key,  {% for key, value in names %}
 				`{{key}}` #{ TYPES["{{value}}"] }, {% end %}
 				`created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
@@ -102,6 +102,14 @@ macro table(kclass, **names)
 			exec "delete from #{@@table_name} where id in (#{id})"
 		end
 
+		def self.delete(**where)
+			sql = "delete * from #{@@table_name} where "
+			where.each do |key, value|
+				sql += " #{key} = '#{value}' and"
+			end
+			exec  sql.rchop("and")
+		end
+
 		def self.delete(where : String)
 			exec "delete from #{@@table_name} " + where
 		end
@@ -155,18 +163,21 @@ macro table(kclass, **names)
 		end
 
 		private def self.query_one(sql, hash)
+			puts sql
 			DB.open DB_URL do |db|
 				db.query_one(sql, as: hash)
 			end
 		end
 
 		private def self.scalar(sql : String)
+			puts sql
 			DB.open DB_URL do |db|
 				result = db.scalar(sql)
 			end
 		end
 
 		private def self.exec(sql : String)
+			puts sql
 			DB.open DB_URL do |db|
 				db.exec sql
 			end
@@ -174,8 +185,8 @@ macro table(kclass, **names)
 
 		TYPES = {
 			String: "varchar(255)",
-			Int32:  "int",
-			Int64: "long",
+			Int32:  "integer unsigned",
+			Int64: "bigint unsigned",
 			Float32: "float",
 			Float64: "double",
 			Time: "datetime",
@@ -184,6 +195,7 @@ macro table(kclass, **names)
 		}
 
 	end
+	{{kclass.id}}.create
 end
 class Object
   macro def methods : Array(Symbol)
