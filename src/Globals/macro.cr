@@ -1,5 +1,5 @@
 macro view(filename, title, flash = "")
-	page_title = {{title}}
+	page_title = {{title}} if {{ title }} != ""
 	flash = {{ flash }}
 	render "src/Apps/views/#{{{filename}}}.ecr", "src/Layouts/layout.ecr"
 end
@@ -12,10 +12,8 @@ end
 
 macro redirect_back(location = "")
 	if env.request.headers["Referer"]?
-		puts "heelo"
 		env.redirect env.request.headers["Referer"]
 	else
-		puts "ss"
 		env.redirect {{location}}
 	end
 end

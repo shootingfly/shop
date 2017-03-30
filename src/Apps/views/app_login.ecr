@@ -1,26 +1,15 @@
-<h3 class="text-center"><%= page_title %></h3>
-<form action="/login" method="post" class="form-horizontal">
-	<div class="form-group">
-		<label class="col-sm-4 control-label"><i class="fa fa-user"></i></label>
-		<div class="col-sm-4">
-			<input type="text" name="username" placeholder="username" class="form-control" required autofocus>
-		</div>
+<form class="mdui-col-xs-12 mdui-col-md-4 mdui-col-offset-md-3" action="/login" method="post">
+	<div class="mdui-textfield">
+		<input class="mdui-textfield-input" type="text" name="username"  placeholder="用户名" required autofocus>
 	</div>
-	<div class="form-group">
-		<label class="col-sm-4 control-label"><i class="fa fa-lock"></i></label>
-		<div class="col-sm-4">
-			<input type="text" name="password" placeholder="passoword" class="form-control" required>
-		</div>
+	<div class="mdui-textfield">
+		<input class="mdui-textfield-input" type="password"  placeholder="密码" name="password"  pattern="^.*(?=.{6,})(?=.*[a-z])(?=.*[A-Z]).*$" required>
 	</div>
-	<div class="form-group">
-		<div class="col-sm-4 col-sm-offset-4">
-			<input type="submit" value="登录" class="form-control btn btn-primary">
-		</div>
+	<div class="mdui-textfield">
+		<input type="submit" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">
 	</div>
-	<div class="form-group">
-		<div class="col-sm-4 col-sm-offset-4">
-			<a href="/register" class="text-muted">立即注册</a>
-			<a href="/forget" class="text-muted pull-right">忘记密码</a>
-		</div>
+	<div class="mdui-textfield">
+		<a class="mdui-text-color-black-10 mdui-float-left" href="/register">注册</a>
+		<a class="mdui-text-color-black-20 mdui-float-right" href="/">忘记密码</a>
 	</div>
 </form>

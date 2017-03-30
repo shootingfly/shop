@@ -28,6 +28,6 @@ def cates
   Cate.all
 end
 
-macro li(url)
-	"<li#{" class=active" if env.request.path == {{url}} }>"
+macro active?(url)
+	"mdui-list-item-active" if env.request.path == {{url}}
 end

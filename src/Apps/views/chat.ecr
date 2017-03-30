@@ -1,0 +1,27 @@
+<p id="ua"></p>
+<pre id='chat'></pre>
+  <form>
+  <input id='msg' placeholder='message...'  />
+  <input type="submit" value="Send">
+</form>
+<script>
+  $(document).ready(function() {
+    // Open WebSocket connection
+    var ws = new WebSocket("ws://" + location.host + "/chat");
+    // Append each message
+    ws.onmessage = function(e) { $('#chat').append(e.data + "\n") };
+    $("form").bind('submit', function(e) {
+      var message = $('#msg').val();
+      ws.send(message);
+      $('#msg').val(''); $('#msg').focus();
+      e.preventDefault();
+    });
+    // window.onclose = function() {
+    //   websocket.onclose = function () {}; // disable onclose handler first
+    //   websocket.close()
+    // };
+  });
+  var ua =  navigator.userAgent.indexOf('Mobile');
+  $("#ua").text(ua);
+  console.log(ua);
+</script>

@@ -3,47 +3,59 @@
 <head>
 	<meta charset="utf-8">
 	<title><%= page_title %></title>
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/css/smt-bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="An Online Shop For South China Normal University">
+	<link rel="stylesheet" type="text/css" href="/mdui/css/mdui.css">
+	<script src="/mdui/js/mdui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/fly.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/requestAnimationFrame.js" type="text/javascript" charset="utf-8"></script>
 </head>
-<body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a href="/" class="navbar-brand">在线商城</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<% cates.each do |cate| %>
-					<%= li "/product/#{cate.cate_id}" %><a href="/product/<%= cate.cate_id %>"><%= cate.name %></a></li>
-				<% end %>
-			</ul>
-<!-- 			<form class="navbar-form">
-				<div class="form-group">
-					<input type="text" name="product">
-				</div>
-				<button type="submit">搜索</button>
-			</form> -->
-			<ul class="nav navbar-nav navbar-right">
-			<% if login? %>
-				<%= li "/cart" %><a href="/cart">购物车<span class="badge"><%= cart_count %></span></a></li>
-				<%= li "/logout" %><a href="/logout" class="btn btn-danger">注销</a></li>
-			<% else %>
-				<div class="navbar-btn">
-					<div class="btn-group btn-divided">
-						<a href="/login" class="btn btn-primary">登录<i data-text="or"></i></a>
-						<a href="/register" class="btn btn-success">注册</a>
-					</div>
-				</div>
-			<% end %>
-			</ul>
+<body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
+	<header class="mdui-appbar mdui-appbar-fixed">
+		<div class="mdui-toolbar mdui-color-theme">
+			<span class="mdui-btn mdui-btn-icon mdui-rippler mdui-ripple-white" mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span> 
+			<a href="/">在线商城</a>
+			<div class="mdui-toolbar-spacer"></div>
+			<%- unless login? -%>
+				<a href="/login">登录</a>
+				<a href="/register">注册</a>
+			<%- else -%>
+				<a href="/logout">注销</a>
+			<%- end -%>
 		</div>
-	</nav>
-	<div class="bs-divider">每天１２点，前１００名下单用户，立减５元</div>
-	<div class="container">
+	</header>
+	<div class="mdui-drawer mdui-drawer-show" id="main-drawer">
+		<div class="mdui-list">
+			<%- cates.each do |cate| -%>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/product/#{cate.cate_id}") %>" href="/product/<%= cate.cate_id %>" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-<%= cate.color %>"><%= cate.icon %></i>
+				<span class="mdui-list-item-content" "><%= cate.name %></span>
+			</a>
+			<%- end -%>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/order/1") %>" href="/order/1" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe569;</i>
+				<span class="mdui-list-item-content" ">订单详情</span>
+			</a>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/order") %>" href="/order" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe569;</i>
+				<span class="mdui-list-item-content" ">我的订单</span>
+			</a>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/chat") %>" href="/chat" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe569;</i>
+				<span class="mdui-list-item-content" ">聊天</span>
+			</a>
+		</div>
+	</div>
+	<div class="mdui-container">
+		<br />
 		<%= content %>
 	</div>
+	<a class="mdui-fab mdui-fab-fixed mdui-color-theme-accent" href="/cart" id="end"><i class="mdui-icon material-icons">shopping_cart</i></a>
+	<script type="text/javascript">
+		// $("#main-drawer").addClass("mdui-drawer-close");
+	</script>`
 </body>
 </html>

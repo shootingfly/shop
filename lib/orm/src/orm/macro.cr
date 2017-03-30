@@ -13,10 +13,6 @@ macro table(kclass, **names)
 		property! created_at : Time
 		property! updated_at : Time
 
-		def initialize
-			@id = 1
-		end
-
 		def self.drop
 			exec "drop table if exists #{@@table_name}"
 		end
@@ -154,7 +150,6 @@ macro table(kclass, **names)
 		end
 
 		private def self.query(sql : String)
-			puts sql
 			DB.open DB_URL do |db|
 				db.query(sql) do |rs|
 					from_rs(rs)
@@ -163,21 +158,18 @@ macro table(kclass, **names)
 		end
 
 		private def self.query_one(sql, hash)
-			puts sql
 			DB.open DB_URL do |db|
 				db.query_one(sql, as: hash)
 			end
 		end
 
 		private def self.scalar(sql : String)
-			puts sql
 			DB.open DB_URL do |db|
 				result = db.scalar(sql)
 			end
 		end
 
 		private def self.exec(sql : String)
-			puts sql
 			DB.open DB_URL do |db|
 				db.exec sql
 			end
