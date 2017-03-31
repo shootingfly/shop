@@ -1,0 +1,126 @@
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+    <div class="mdui-card-header-title">西二张国荣</div>
+    <div class="mdui-card-header-subtitle">03-31 20:58</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">我爱你!!!!!</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+    <div class="mdui-card-header-title">西二张国荣</div>
+    <div class="mdui-card-header-subtitle">03-31 20:58</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">真的真的好爱你!!!</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+    <div class="mdui-card-header-title">大白</div>
+    <div class="mdui-card-header-subtitle">03-31 22:06</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">我爱你</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=55&s=100"/>
+    <div class="mdui-card-header-title">55</div>
+    <div class="mdui-card-header-subtitle">03-31 22:09</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">aa</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=55&s=100"/>
+    <div class="mdui-card-header-title">55</div>
+    <div class="mdui-card-header-subtitle">03-31 22:09</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">sdg</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=sdd&s=100"/>
+    <div class="mdui-card-header-title">dd</div>
+    <div class="mdui-card-header-subtitle">03-31 22:24</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">efgd</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=55555&s=100"/>
+    <div class="mdui-card-header-title">555</div>
+    <div class="mdui-card-header-subtitle">03-31 22:24</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">nn</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=55555&s=100"/>
+    <div class="mdui-card-header-title">555</div>
+    <div class="mdui-card-header-subtitle">03-31 22:26</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">ss</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=55555&s=100"/>
+    <div class="mdui-card-header-title">555</div>
+    <div class="mdui-card-header-subtitle">03-31 22:26</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">ss</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=55555&s=100"/>
+    <div class="mdui-card-header-title">555</div>
+    <div class="mdui-card-header-subtitle">03-31 22:27</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">sdg</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=555&s=100"/>
+    <div class="mdui-card-header-title">5555</div>
+    <div class="mdui-card-header-subtitle">03-31 22:32</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">sfhs</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+    <div class="mdui-card-header-title">5558</div>
+    <div class="mdui-card-header-subtitle">03-31 22:33</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">sfdhui</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+    <div class="mdui-card-header-title">asf</div>
+    <div class="mdui-card-header-subtitle">03-31 22:35</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">cadge</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+    <div class="mdui-card-header-title">5558</div>
+    <div class="mdui-card-header-subtitle">03-31 22:35</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">sff</div>
+</div>
