@@ -4,6 +4,8 @@
 		<th>name</th>	
 		<th>cate_id</th>	
 		<th>show_order</th>	
+		<th>icon</th>	
+		<th>color</th>	
 		<th>操作</th>
 	</thead>
 	<tbody>
@@ -12,6 +14,8 @@
 			<td><%= item.name %></td>	
 			<td><%= item.cate_id %></td>	
 			<td><%= item.show_order %></td>	
+			<td><%= item.icon %></td>	
+			<td><%= item.color %></td>	
 			<td>
 				<a href="/admin/editCate/<%= item.id %>" class="btn btn-sm">编辑</a>
 				<a href="/admin/deleteCate/<%= item.id %>" class="btn btn-sm">删除</a>

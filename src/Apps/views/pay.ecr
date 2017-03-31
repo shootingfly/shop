@@ -1,0 +1,9 @@
+<form action="<%= pay_url %>" method="post" name="pay">
+	<% pay_options.each do |key, value| %>
+		<input type="hidden" name="<%= key %>" value="<%= value %>" />
+	<% end %>
+	<input type="submit"  value="支付"  />
+</form>
+<!-- <script type="text/javascript"> -->
+	<!-- document.forms["pay"].submit(); -->
+<!-- </script>	 -->

@@ -1,0 +1,38 @@
+
+<table class="table table-bordered table-hover datatable">
+	<thead>			
+		<th>user_id</th>	
+		<th>order_number</th>	
+		<th>status</th>	
+		<th>product_detail</th>	
+		<th>quantity</th>	
+		<th>actual_price</th>	
+		<th>total_price</th>	
+		<th>shipping_time</th>	
+		<th>shipping_address</th>	
+		<th>shipping_service</th>	
+		<th>pay_way</th>	
+		<th>操作</th>
+	</thead>
+	<tbody>
+	<% items.each do |item| %>
+		<tr>					
+			<td><%= item.user_id %></td>	
+			<td><%= item.order_number %></td>	
+			<td><%= item.status %></td>	
+			<td><%= item.product_detail %></td>	
+			<td><%= item.quantity %></td>	
+			<td><%= item.actual_price %></td>	
+			<td><%= item.total_price %></td>	
+			<td><%= item.shipping_time %></td>	
+			<td><%= item.shipping_address %></td>	
+			<td><%= item.shipping_service %></td>	
+			<td><%= item.pay_way %></td>	
+			<td>
+				<a href="/admin/editOrder/<%= item.id %>" class="btn btn-sm">编辑</a>
+				<a href="/admin/deleteOrder/<%= item.id %>" class="btn btn-sm">删除</a>
+			</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>

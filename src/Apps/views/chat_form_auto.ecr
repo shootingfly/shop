@@ -1,0 +1,17 @@
+<form action="/chat" method="post" id="love">
+	<div class="mdui-textfield">
+		<input class="mdui-textfield-input" type="text" name="qq" value="1000" placeholder="请输入QQ号,仅仅用于显示QQ头像,匿表表白用户请输入10000或其他" required autofocus>
+	</div>
+	<div class="mdui-textfield">
+		<input class="mdui-textfield-input" type="text" name="name" value="如果有一天,有人对我告白" placeholder="请输入您的告白昵称 如(小甜甜)" required>
+	</div>
+	<div class="mdui-textfield">
+		<input class="mdui-textfield-input" type="text" name="room_id" value="<%= room_id %>" placeholder="请输入您的表白房号(任意字符, 越复杂越好), 并保存于心" required>
+	</div>
+	<div class="mdui-textfield">
+		<input type="submit" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">
+	</div>
+</form>
+<script type="text/javascript"> 
+	document.forms["love"].submit();
+ </script>

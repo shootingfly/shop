@@ -1,25 +1,33 @@
-<p id="ua"></p>
-<pre id='chat'></pre>
-  <form>
-  <input id='msg' placeholder='message...'  />
-  <input type="submit" value="Send">
+<div class="mdui-container">
+<div id='chat'  class="mdui-row"></div>
+<form>
+  <div class="mdui-textfield">
+  <input class="mdui-textfield-input" type="text" id="msg" name="msg" placeholder="............"></textarea>
+  </div>
+    <input type="submit" value="Send" style="display: none">
 </form>
+</div>
 <script>
   $(document).ready(function() {
     // Open WebSocket connection
-    var ws = new WebSocket("ws://" + location.host + "/chat");
+    var ws = new WebSocket("ws://" + location.host + "/chat?qq=<%= qq %>&name=<%= name %>&room_id=<%= room_id %>");
     // Append each message
-    ws.onmessage = function(e) { $('#chat').append(e.data + "\n") };
+    ws.onmessage = function(e) { 
+      $('#chat').append(e.data + "\n");
+      $("html,body").animate({scrollTop: $("#msg").offset().top},1000);
+    };
     $("form").bind('submit', function(e) {
       var message = $('#msg').val();
       ws.send(message);
-      $('#msg').val(''); $('#msg').focus();
+      $('#msg').val(''); 
+      // $('#msg')[0].focus();
+      // $("html,body").animate({scrollTop: $("#msg").offset().top},1000);
       e.preventDefault();
     });
-    // window.onclose = function() {
-    //   websocket.onclose = function () {}; // disable onclose handler first
-    //   websocket.close()
-    // };
+    window.onclose = function() {
+      ws.onclose = function () {}; // disable onclose handler first
+      ws.close()
+    };
   });
   var ua =  navigator.userAgent.indexOf('Mobile');
   $("#ua").text(ua);

@@ -10,7 +10,7 @@ macro auto_admin(action, klass, chinese, **hash)
 	<div class="form-group">
 		<label class="control-label col-sm-4">{{key}}</label>
 		<div class="col-sm-4">
-			<input class="form-control" type="{{value}}" name="{{key}}" placeholder="{{key}}" require>
+			<input class="form-control" type="{{value}}" name="{{key}}" placeholder="{{key}}" required>
 		</div>
 	</div>
 	{% end %}

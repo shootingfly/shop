@@ -8,6 +8,8 @@ post "/admin/newCate" do |env|
 	name: env.params.body["name"],	
 	cate_id: env.params.body["cate_id"],	
 	show_order: env.params.body["show_order"],	
+	icon: env.params.body["icon"],	
+	color: env.params.body["color"],	
 	)
 	admin_view "newCate", "添加分类", "添加成功！"
 end
