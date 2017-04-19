@@ -1,0 +1,10 @@
+.img-xs{
+	width: 130px;
+	height: 130px;
+}
+@media (min-width: 1024px) {
+  .img-md{
+  	width: 175px;
+  	height: 175px;
+  }
+}

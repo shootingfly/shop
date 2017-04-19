@@ -1,0 +1,11 @@
+#!/bin/sh
+CON="cart product user order cate"
+for x in $CON
+do
+cat > $x\_spec.cr <<_EOF_
+require "../spec_hellper" 
+require "../src/Apps/controllers/$x"
+
+_EOF_
+echo $x
+done

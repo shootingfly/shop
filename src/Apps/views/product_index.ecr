@@ -1,49 +1,7 @@
-<style type="text/css" media="screen">
-.img-xs{
-	width: 130px;
-	height: 130px;
-}
-@media (min-width: 1024px) {
-  .img-md{
-  	width: 175px;
-  	height: 175px;
-  }
-}
-</style>
-<script type="text/javascript">
-	function fly(product_id) {
-		x = document.body.scrollTop;
-    		flyer = $("#" + product_id);
-    		flyer.parent().append(flyer.clone());
-    		var start = flyer.offset();
-		var end = $("#end").offset();
-		flyer.fly({
-			start:{
-				left: start.left,  //开始位置（必填）#fly元素会被设置成position: fixed
-				top: start.top - x, //开始位置（必填）
-			},
-			end:{
-				left: end.left, //结束位置（必填）
-				top: end.top - x,  //结束位置（必填）
-				width: 0, //结束时高度
-				height: 0, //结束时高度
-			}
-		});
-	}
-	function add(product_id) {
-		$.ajax({
-			type: "GET",
-			url: "/cart/add/" + product_id,
-			success: function(data) {
-				fly(product_id);
-			}
-		});
-	}
-</script>
 <%- products.each do |product| -%>
-	<div class="mdui-col-xs-6 mdui-col-md-3">
+	<div class="mdui-col-xs-6 mdui-col-md-3" id="<%= product.id %>">
 		<div class="mdui-col-xs-12">
-			<img alt="最后幸存者" src="/image/1.jpg" class="img-xs img-md" id="<%= product.id %>"/>
+			<img alt="最后幸存者" src="/image/1.jpg" class="img-xs img-md"/>
 		</div>
 		<div class="mdui-col-xs-10">
 			<h4 class="mdui-text-center"><%= product.name %></h4>

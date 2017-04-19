@@ -9,4 +9,4 @@ require "./Apps/controllers/*"
 require "./Admins/helper"
 require "./Admins/controllers/*"
 
-Kemal.run(port: 80)
+Kemal.run

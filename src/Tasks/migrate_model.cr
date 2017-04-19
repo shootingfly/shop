@@ -10,4 +10,4 @@ Cate.create
 Product.create
 Cart.create
 Order.create(drop?: true)
-OrderItem.create(drop?: true)
+# OrderItem.create(drop?: true)

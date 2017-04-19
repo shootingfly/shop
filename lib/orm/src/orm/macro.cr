@@ -9,6 +9,7 @@ macro table(kclass, **names)
 		{% for key, value in names %}
 			property! {{key}} : {{value}}
 		{% end %}
+
 		property! id : Int32
 		property! created_at : Time
 		property! updated_at : Time
@@ -24,7 +25,7 @@ macro table(kclass, **names)
 				`id` int not null auto_increment primary key,  {% for key, value in names %}
 				`{{key}}` #{ TYPES["{{value}}"] }, {% end %}
 				`created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-				`updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  
+				`updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 			)ENGINE=InnoDB DEFAULT CHARSET=utf8
 			END
 			exec? ? exec(sql) : sql
@@ -56,11 +57,13 @@ macro table(kclass, **names)
 			query "select * from #{@@table_name} " + where
 		end
 
-		def self.find(id : Int32 | Array(Int32))
-			if typeof(id) == Array(Int32)
-				id = id.to_s[1...-1]
-			end
-			query "select * from #{@@table_name} where id in (#{id})"
+		def self.find(id : Int32)
+			query "select * from #{@@table_name} where id = #{id}"
+		end
+
+		def self.find(ids : Array(Int32))
+			ids = ids.to_s[1...-1]
+			query "select * from #{@@table_name} where id in (#{ids})"
 		end
 
 		def self.find(where : String)
@@ -76,6 +79,7 @@ macro table(kclass, **names)
 		end
 
 		def self.all : Array(self)
+			puts Time.now, "select * from #{@@table_name} "
 			query "select * from #{@@table_name} "
 		end
 
@@ -99,7 +103,7 @@ macro table(kclass, **names)
 		end
 
 		def self.delete(**where)
-			sql = "delete * from #{@@table_name} where "
+			sql = "delete from #{@@table_name} where "
 			where.each do |key, value|
 				sql += " #{key} = '#{value}' and"
 			end
@@ -149,7 +153,8 @@ macro table(kclass, **names)
 			results
 		end
 
-		private def self.query(sql : String)
+		def self.query(sql : String)
+			puts sql
 			DB.open DB_URL do |db|
 				db.query(sql) do |rs|
 					from_rs(rs)
@@ -157,19 +162,21 @@ macro table(kclass, **names)
 			end
 		end
 
-		private def self.query_one(sql, hash)
+		def self.query_one(sql, hash)
+			puts sql
 			DB.open DB_URL do |db|
 				db.query_one(sql, as: hash)
 			end
 		end
 
-		private def self.scalar(sql : String)
+		def self.scalar(sql : String)
 			DB.open DB_URL do |db|
 				result = db.scalar(sql)
 			end
 		end
 
-		private def self.exec(sql : String)
+		def self.exec(sql : String)
+			puts sql
 			DB.open DB_URL do |db|
 				db.exec sql
 			end
@@ -187,13 +194,13 @@ macro table(kclass, **names)
 		}
 
 	end
-	{{kclass.id}}.create
+	# {{kclass.id}}.create
 end
-class Object
-  macro def methods : Array(Symbol)
-    {{ @type.methods.map { |x| %(:"#{x.name}").id } }}
-  end
-end
+# class Object
+#   macro def methods : Array(Symbol)
+#     {{ @type.methods.map { |x| %(:"#{x.name}").id } }}
+#   end
+# end
 # class Array(T)
 # 	macro method_missing(call)
 #   		self[0].{{call.name.id}}

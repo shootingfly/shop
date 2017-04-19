@@ -1,0 +1,9 @@
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+    <div class="mdui-card-header-title">谢非</div>
+    <div class="mdui-card-header-subtitle">04-01 13:07</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">你个SB</div>
+</div>

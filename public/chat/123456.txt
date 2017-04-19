@@ -1,0 +1,18 @@
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=123456&s=100"/>
+    <div class="mdui-card-header-title">123456</div>
+    <div class="mdui-card-header-subtitle">04-01 21:10</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">123456</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=123456&s=100"/>
+    <div class="mdui-card-header-title">123456</div>
+    <div class="mdui-card-header-subtitle">04-01 21:10</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">654321</div>
+</div>

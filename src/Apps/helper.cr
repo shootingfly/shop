@@ -1,33 +1,27 @@
 macro login?
-  env.session.string?("auth_token") || env.request.cookies["auth_token"]?
+	env.request.cookies.has_key?("auth_token")
 end
 
-def cart_count
-  Cart.get_num("select sum(number) from Cart where user_id = 1").to_s[0...-2]
-end
-
-macro do_login_before!
-  unless current_user
-    env.redirect "/login"
-  end
+macro current
+	User.find(token: cookie("auth_token"))[0].as(User)
 end
 
 macro current_user
-  env.session.string?("auth_token") || env.request.cookies["auth_token"]?
+	User.find(token: cookie("auth_token"))[0].as(User).id
 end
 
-# macro current_user
-#   1 || env.session.string?("auth_token")
+# macro current
+# 	user = nil
+# 	if env.request.cookies["auth_token"]?
+# 		user = User.find(token: env.request.cookies["auth_token"].value)[0]?
+# 	end
+# 	user
 # end
-
-def generate_token
-  "hello"
-end
-
-def cates
-  Cate.all
-end
 
 macro active?(url)
 	"mdui-list-item-active" if env.request.path == {{url}}
+end
+
+macro nav_active?(url)
+	"mdui-bottom-nav-active" if env.request.path =~ {{url}}
 end

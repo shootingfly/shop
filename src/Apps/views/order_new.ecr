@@ -1,0 +1,73 @@
+<h5>收货信息</h5>
+<div class="mdui-card">
+	<!-- 卡片头部，包含头像、标题、副标题 -->
+	<div class="mdui-card-header">
+		<img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+		<div class="mdui-card-header-title"><%= username %> <%= address %></div>
+		<div class="mdui-card-header-subtitle"><%= phone %></div>
+	</div>
+</div>
+<h5>订单详情</h5>
+<table class="mdui-table">
+	<thead>
+		<tr>
+			<th>商品</th>
+			<th class="mdui-table-col-numeric">数量</th>
+			<th class="mdui-table-col-numeric">小计( 元 )</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% total = 0 %>
+		<% products.each_with_index do |product, i| %>
+		<tr>
+			<td><%= product.name %></td>
+			<td class="mdui-text-muted">x<%= carts[i].number %></td>
+			<td>￥<%= product.price * carts[i].number %></td>
+		</tr>
+		<% total += product.price * carts[i].number %>
+		<% end %>
+		<tr>
+			<td colspan="2">在线支付立减优惠</td>
+			<td>-25</td>
+		</tr>
+	</tbody>
+</table>
+<h3 class="mdui-text-right mdui-text-color-red"><span class="mdui-text-color-black">实际支付：</span>￥<%= total %></h3>
+<form action="/order/new" method="post">
+	<input type="hidden" name="total" value="<%= total %>" />
+	<input type="hidden" name="username" value="<%= username %>" />
+	<input type="hidden" name="phone" value="<%= phone %>" />
+	<input type="hidden" name="address" value="<%= address %>" />
+	<div class="mdui-textfield">
+		<input class="mdui-textfield-input" type="text" name="remark" placeholder="备注"/>
+	</div>
+	<div>
+		<span>送达时间：</span>
+		<label class="mdui-radio">
+			<input type="radio" name="shipping" value="定时送出"/>
+			<i class="mdui-radio-icon"></i>
+			定时送出&nbsp;&nbsp;&nbsp;&nbsp;
+		</label>
+		<label class="mdui-radio">
+			<input type="radio" name="shipping" value="立即送出" checked/>
+			<i class="mdui-radio-icon"></i>
+			立即送出
+		</label>
+	</div>
+	<div>
+		<span>支付方式：</span>
+	  <label class="mdui-radio">
+	    <input type="radio" name="pay_way" value="货到付款"/>
+	    <i class="mdui-radio-icon"></i>
+	    货到付款&nbsp;&nbsp;&nbsp;&nbsp;
+	  </label>
+	  <label class="mdui-radio">
+	    <input type="radio" name="pay_way" value="在线支付" checked/>
+	    <i class="mdui-radio-icon"></i>
+	    在线支付
+	  </label>
+	</div>
+	<div class="mdui-textfield">
+		<input class="mdui-btn mdui-btn-block mdui-color-theme" type="submit" value="提交订单"/>
+	</div>
+</form>

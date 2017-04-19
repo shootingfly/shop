@@ -1,76 +1,93 @@
-def order_handle(env)
-  carts = Cart.find(user_id: current_user)
-  product_ids = carts.map &.product_id
-  products = Product.find(product_ids)
-  total_price = 0.0
-  quantity = 0
-  products.each_with_index do |product, i|
-    total_price += carts[i].number * product.price
-    quantity += carts[i].number
-  end
-  off_price = env.params.body["off_price"].to_f
-  shipping = env.params.body["shipping"].to_f
-  shipping_time = env.params.body["shipping_time"]
-  shipping_address = env.params.body["shipping_address"]
-  shipping_service = env.params.body["shipping_service"]
-  pay_way = env.params.body["pay_way"]
-  actual_price = total_price - off_price - shipping
-  Order.insert(
-    user_id: current_user,              # 用户ID
-    order_number: Time.now.epoch,       # 订单号
-    status: "待支付",                      # 订单状态
-    product_detail: products,           # 商品信息
-    quantity: quantity,                 # 商品总数
-    actual_price: actual_price,         # 实付
-    total_price: total_price,           # 总计
-    off_detail: String,                 # 优惠信息
-    off_price: off_price,               # 优惠
-    shipping: shipping,                 # 配送费
-    shipping_time: shipping_time,       # 期望配送时间
-    shipping_address: shipping_address, # 配送地址
-    shipping_service: shipping_service, # 配送服务
-    pay_way: pay_way,                   # 支付方式
-  )
-end
-
-post "/newOrder" do |env|
-  if current_user
-    order_handle(env)
-  else
+# 提交订单页面
+before_all "/orde*" do |env|
+  unless login?
     env.redirect "/login"
+    halt env, 302
   end
 end
 
+
+get "/order/new" do |env|
+    username = current.username
+    phone = current.phone
+    address = current.address
+    expected_at = Time.now
+    pay_way = "货到付款"
+    status = "待支付"
+    carts = [] of Cart
+    products = [] of Product
+    carts = Cart.find(user_id: current_user) if login?
+    products = Product.find(carts.map &.product_id) if carts.any?
+    view "order_new", "提交订单"
+end
+
+# 提交订单
+post "/order/new" do |env|
+  order_no = Time.now.epoch_ms
+  carts = [] of Cart
+  products = [] of Product
+  carts = Cart.find(user_id: current_user) if login?
+  product_ids = carts.map &.product_id
+  products = Product.find(product_ids) if carts.any?
+  sql = "update Product set stock = case id "
+  number = 0
+  product_details = [] of ProductDetail
+  products.size.times do |i|
+    sql += "when #{products[i].id} then #{products[i].stock - carts[i].number} "
+    product_details << ProductDetail.new(
+      id: products[i].id,
+      name: products[i].name,
+      price: products[i].price * carts[i].number,
+      number: carts[i].number
+    )
+    number += carts[i].number
+  end
+  sql += "end where id in (#{product_ids.to_s[1...-1]})"
+  Product.exec(sql)
+
+  Order.insert(
+    user_id: current_user,
+    # 个人信息
+    username: env.params.body["username"],
+    phone: env.params.body["phone"],
+    address: env.params.body["address"],
+    # 商品信息
+    total: env.params.body["total"],
+    product_detail: product_details.to_json,
+    quantity: number,
+    # 配送与支付信息
+    shipping: 1,
+    pay_way: env.params.body["pay_way"],
+    order_no: order_no,
+    status: "待支付"
+  )
+  if env.params.body["pay_way"] == "货到付款"
+    env.redirect "/order/#{order_no}"
+  else
+    env.redirect "/pay"
+  end
+end
+
+# 订单列表
 get "/order" do |env|
-  # if current_user
-  # orders = Order.find(user_id: current_user)
-  # else
-  orders = [] of Order
-  # end
-  view "order_index", "订单列表"
+  orders = Order.find(user_id: current_user)
+  view "order_index", "我的订单"
 end
 
-get "/order/:order_number" do |env|
-  order_number = env.params.url["order_number"].to_i
-  order = Order.find(user_id: current_user, order_number: order_number)
-  view "order_show", "订单项"
+# 查看单个订单
+get "/order/:order_no" do |env|
+  order = Order.find(order_no: env.params.url["order_no"].to_i64)[0]
+  product_details = Array(ProductDetail).from_json(order.product_detail)
+  view "order_show", "订单详情"
 end
 
-#   carts = Cart.find(user_id: current_user)
-#   product_ids = [] of Int32
-#   carts.each { |cart| product_ids << cart.product_id }
-#   sum = 0.0
-#   contents = ""
-#   Product.find(product_ids).each_with_index do |product, i|
-#     total = carts[i].number * product.price
-#     sum += total
-#     contents += "#{product.id},#{product.price},#{carts[i].number},#{total} \n"
-#   end
-#   Order.insert(
-#     order_id: Time.now.epoch_ms,
-#     user_id: 1,
-#     status: "paying",
-#     sum: sum,
-#     content: contents,
-#   )
-# end
+get "/order/delete/:order_no" do |env|
+  order_no = env.params.url["order_no"].to_i64
+  order = Order.find(order_no: order_no, user_id: current_user)[0]
+  if order
+    Order.delete(order_no: order_no)
+    env.redirect "/order"
+  else
+    env.redirect "/"
+  end
+end

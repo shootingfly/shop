@@ -1,0 +1,27 @@
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=5201314&s=100"/>
+    <div class="mdui-card-header-title">林志玲</div>
+    <div class="mdui-card-header-subtitle">04-01 13:49</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">i love u</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=5201314&s=100"/>
+    <div class="mdui-card-header-title">林志玲</div>
+    <div class="mdui-card-header-subtitle">04-01 13:50</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">Can u be my boy friend ?</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
+    <div class="mdui-card-header-title">西二吴亦凡</div>
+    <div class="mdui-card-header-subtitle">04-01 13:51</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">对不起，我不要外国女朋友。</div>
+</div>

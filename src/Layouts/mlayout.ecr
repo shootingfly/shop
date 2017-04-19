@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<title><%= page_title %></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="An Online Shop For South China Normal University">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/mdui/css/mdui.css">
+	<script src="/mdui/js/mdui.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/fly.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/requestAnimationFrame.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body class="mdui-bottom-nav-fixed mdui-drawer-body-right mdui-theme-primary-indigo mdui-theme-accent-pink">
+	<div class="mdui-drawer mdui-drawer-right mdui-drawer-show" id="main-drawer">
+		<div class="mdui-list">
+			<%- Const.cate.each do |cate| -%>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/product/#{cate.cate_id}") %>" href="/product/<%= cate.cate_id %>" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-<%= cate.color %>"><%= cate.icon %></i>
+				<span class="mdui-list-item-content" "><%= cate.name %></span>
+			</a>
+			<%- end -%>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/order/1") %>" href="/order/1" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe569;</i>
+				<span class="mdui-list-item-content" ">订单详情</span>
+			</a>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/order") %>" href="/order" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe569;</i>
+				<span class="mdui-list-item-content" ">我的订单</span>
+			</a>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/chatform") %>" href="/chatform" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe569;</i>
+				<span class="mdui-list-item-content" ">聊天</span>
+			</a>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/pay") %>" href="/pay" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe569;</i>
+				<span class="mdui-list-item-content">
+				</span>
+			</a>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/order/new") %>" href="/order/new" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">&#xe569;</i>
+				<span class="mdui-list-item-content">确认订单
+				</span>
+			</a>
+		</div>
+	</div>
+	<div class="mdui-container">
+		<br />
+		<%= content %>
+	</div>
+	<div class="mdui-bottom-nav mdui-color-theme">
+		<a href="/home" class="mdui-ripple mdui-ripple-white <%= nav_active?("/home") %>">
+			<i class="mdui-icon material-icons">home</i>
+			<label>首页</label>
+		</a>
+		<a href="javascript:void(0);" class="mdui-ripple mdui-ripple-white <%= nav_active?("/product*") %>" mdui-drawer="{target: '#main-drawer'}">
+			<i class="mdui-icon material-icons">dehaze</i>
+			<label>分类</label>
+		</a>
+		<a href="/cart" class="mdui-ripple mdui-ripple-white <%= nav_active?(/cart/) %>" id="end">
+			<i class="mdui-icon material-icons">shopping_cart</i>
+			<label>购物车</label>
+		</a>
+		<a href="/my" class="mdui-ripple mdui-ripple-white <%= nav_active?("/my") %>">
+			<i class="mdui-icon material-icons">account_circle</i>
+			<label>我的</label>
+		</a>
+	</div>
+</body>
+</html>

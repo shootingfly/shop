@@ -14,27 +14,24 @@
 	</style>
 </head>
 <body>
-<div class="modal show" id="login">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title text-center" id="myModalLabel">
-					登录
-				</h4>
-			</div>
-			<div class="modal-body">
-				<form  action="/root" method="post" accept-charset="utf-8" class="horizontal-form">
-					<p><input type="text" name="username" class="form-control" placeholder="username"></p>
-					<p><input type="password" name="password" class="form-control" placeholder="password"></p>
-					<p><input type="submit" class="btn btn-success btn-block" value="登录"></p>
-						<div class="error">
-		<p class="text-danger"><%= flash %></p>
-	</div>
-				</form>
+	<div class="modal show" id="login">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title text-center" id="myModalLabel">
+						登录
+					</h4>
+				</div>
+				<div class="modal-body">
+					<form  action="/root" method="post" accept-charset="utf-8" class="horizontal-form">
+						<p><input type="text" name="username" class="form-control" placeholder="username"></p>
+						<p><input type="password" name="password" class="form-control" placeholder="password"></p>
+						<p><input type="submit" class="btn btn-success btn-block" value="登录"></p>
+						<div class="error"><p class="text-danger"><%= flash %></p></div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
 </body>
 </html>

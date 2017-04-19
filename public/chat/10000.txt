@@ -124,3 +124,66 @@
   <!-- 卡片的内容 -->
   <div class="mdui-card-content">sff</div>
 </div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=555&s=100"/>
+    <div class="mdui-card-header-title">5555</div>
+    <div class="mdui-card-header-subtitle">03-31 23:20</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">aa</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=ghg&s=100"/>
+    <div class="mdui-card-header-title">nj</div>
+    <div class="mdui-card-header-subtitle">04-01 00:49</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">jjk</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=ghg&s=100"/>
+    <div class="mdui-card-header-title">nj</div>
+    <div class="mdui-card-header-subtitle">04-01 00:49</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">jkngukm</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=ghg&s=100"/>
+    <div class="mdui-card-header-title">nj</div>
+    <div class="mdui-card-header-subtitle">04-01 00:49</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">hjkhu</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=ghg&s=100"/>
+    <div class="mdui-card-header-title">nj</div>
+    <div class="mdui-card-header-subtitle">04-01 00:50</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">hjmm</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=vb&s=100"/>
+    <div class="mdui-card-header-title">uinhh</div>
+    <div class="mdui-card-header-subtitle">04-01 00:56</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">jhbm</div>
+</div>
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=vb&s=100"/>
+    <div class="mdui-card-header-title">uinhh</div>
+    <div class="mdui-card-header-subtitle">04-01 00:56</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">hjhm</div>
+</div>

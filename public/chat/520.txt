@@ -1,0 +1,9 @@
+<div class="mdui-col-xs-12 mdui-card">
+  <div class="mdui-card-header">
+    <img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=12345678&s=100"/>
+    <div class="mdui-card-header-title">小非非</div>
+    <div class="mdui-card-header-subtitle">04-01 19:51</div>
+  </div>
+  <!-- 卡片的内容 -->
+  <div class="mdui-card-content">约么，非</div>
+</div>

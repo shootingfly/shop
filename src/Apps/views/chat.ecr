@@ -1,40 +1,35 @@
 <% if name == "如果有一天,有人对我告白" %>
-<audio class="audio" autoplay="autoplay" loop="loop"><source src="/mp3/张敬轩 - 断点.mp3"></audio>
+<audio id="audio" autoplay="autoplay" loop="loop"><source src="/mp3/张敬轩 - 断点.mp3"></audio>
 <% else %>
-<audio class="audio" autoplay="autoplay" loop="loop"><source src="/mp3/陈奕迅 - 稳稳的幸福.mp3"></audio>
+<audio id="audio" autoplay="autoplay" loop="loop"><source src="/mp3/陈奕迅 - 稳稳的幸福.mp3"></audio>
 <% end %>
 <div class="mdui-container">
 <div id='chat'  class="mdui-row"></div>
 <form>
   <div class="mdui-textfield">
-  <input class="mdui-textfield-input" type="text" id="msg" name="msg" placeholder="............"></textarea>
+  <input class="mdui-textfield-input" type="text" id="msg" name="msg" placeholder="请说点什么"></textarea>
   </div>
-    <input type="submit" value="Send" style="display: none">
+    <input class="mdui-btn mdui-color-theme mdui-btn-block" id="button" type="submit" value="Send" >
 </form>
 </div>
 <script>
   $(document).ready(function() {
-    // Open WebSocket connection
     var ws = new WebSocket("ws://" + location.host + "/chat?qq=<%= qq %>&name=<%= name %>&room_id=<%= room_id %>");
-    // Append each message
     ws.onmessage = function(e) { 
       $('#chat').append(e.data + "\n");
       $("html,body").animate({scrollTop: $("#msg").offset().top},1000);
+      $("#chat").focus();
     };
     $("form").bind('submit', function(e) {
       var message = $('#msg').val();
       ws.send(message);
       $('#msg').val(''); 
-      // $('#msg')[0].focus();
-      // $("html,body").animate({scrollTop: $("#msg").offset().top},1000);
       e.preventDefault();
     });
     window.onclose = function() {
-      ws.onclose = function () {}; // disable onclose handler first
+      ws.onclose = function () {}; 
       ws.close()
     };
   });
   var ua =  navigator.userAgent.indexOf('Mobile');
-  $("#ua").text(ua);
-  console.log(ua);
 </script>

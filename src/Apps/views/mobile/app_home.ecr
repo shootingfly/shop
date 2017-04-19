@@ -1,3 +1,16 @@
+<script src="/js/jquery.slides.min.js"></script>
+<div id="slides">
+  <img src="/image/3.jpg">
+  <img src="/image/4.jpg">
+</div>
+<div class="mdui-tab">
+  <%- Const.cate.each do |cate| -%>
+  <a class="mdui-ripple  mdui-tab-active <%= active?("/product/#{cate.cate_id}") %>" href="/product/<%= cate.cate_id %>" >
+    <i class="mdui-icon material-icons mdui-text-color-<%= cate.color %>"><%= cate.icon %></i>
+    <label><%= cate.name %></label>
+  </a>
+  <%- end -%>
+</div>
 <p class="mdui-text-center mdui-color-theme-accent">24小时热销</p>
 <%- Product.find(cate_id: "server").each do |product| -%>
 	<div class="mdui-col-xs-6 mdui-col-md-3" id="<%= product.id %>">

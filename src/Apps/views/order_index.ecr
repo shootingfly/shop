@@ -1,42 +1,24 @@
-<!-- <h3 class="mdui-text-center">我的订单</h3>
-<table class="mdui-table mdui-table-hoverable">
-<thead>
-<tr>
-	<th>日期</th>
-	<th>商品</th>
-	<th>总数</th>
-	<th>实付</th>
-	<th>操作</th>
-</tr>
-</thead>
-<tbody>
-	< orders.each do |order| %>
-	<tr>
-		<td><= order.created_at %></td>
-		<td><= order.product_detail %></td>
-		<td><= order.quantity %></td>
-		<td><= order.actual_price %></td>
-		<td>删除</td>
-	</tr>
-	< end %>
-</tbody>
-</table> -->
-<br >
-<% 10.times do %>
+<% orders.each do |order| %>
 <div class="mdui-card mdui-col-xs-12 mdui-col-md-4">
-
-  <!-- 卡片头部，包含头像、标题、副标题 -->
   <div class="mdui-card-primary">
-    <div class="mdui-card-primary-subtitle">2017-02-15</div>
+    <div class="mdui-card-primary-subtitle"><%= order.created_at.to_s("%m-%d %H:%M") %></div>
   </div>
-  
-  <!-- 卡片的内容 -->
-  <div class="mdui-card-content">土耳其烤肉</div>
-  
-  <!-- 卡片的按钮 -->
-  <div class="mdui-card-actions">
-    <button class="mdui-btn mdui-ripple">再来一单</button>
-    <button class="mdui-btn mdui-ripple">去评价</button>
+  <div class="mdui-divider"></div>
+  <div class="mdui-card-content">
+  <% product_details = Array(ProductDetail).from_json(order.product_detail) %>
+  <% product_details.each do |item| %>
+    <div class="mdui-clearfix">
+      <span class="mdui-float-left"><%= item.name %></span>
+      <span class="mdui-float-right">x<%= item.number %></span>
+    </div>
+  <% end %>
+    <div class="mdui-text-right">共<%= order.quantity %>件商品，实付<span class="mdui-text-color-red">￥<%= order.total %></span></div>
+  </div>
+  <div class="mdui-divider"></div>
+  <div class="mdui-card-actions mdui-float-right">
+    <a href="/order/<%= order.order_no %>" class="mdui-btn mdui-color-theme mdui-ripple">查看订单</a>
+    <a href="/order/new" class="mdui-btn mdui-color-theme mdui-ripple">再来一单</a>
+    <!-- <a href="/order/delete/<%= order.order_no %>" class="mdui-btn mdui-ripple">删除</a> -->
   </div>
 </div>
 <% end %>

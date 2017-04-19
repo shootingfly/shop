@@ -1,5 +1,4 @@
 def add_cart(env, product_id)
-  login? = current_user ? true : false
   situation = [login?, env.request.cookies.has_key?("cart_item")]
   case situation
   when [false, true]
@@ -25,40 +24,70 @@ end
 
 get "/cart" do |env|
   carts = [] of Cart
-  products = [] of Product
-  if current_user
+  if login?
     carts = Cart.find(user_id: current_user)
-  elsif cookies = env.request.cookies["cart_item"]?.try &.value
-    carts = Array(CartItem).from_json(cookies)
+  elsif cookie?("cart_item")
+    carts = Array(CartItem).from_json(cookie("cart_item"))
   end
-  products = Product.find(carts.map(&.product_id)) if carts.any?
-  view "cart_index", "购物车"
+  total = 0
+  if carts.any?
+    products = Product.find(carts.map(&.product_id))
+    products.size.times do |i|
+      total += carts[i].number * products[i].price
+    end
+    view("cart_index", "购物车")
+  else
+    view("cart_empty", "空的购物车")
+  end
 end
 
-get "/cart/delete/:id" do |env|
-  id = env.params.url["id"].to_i
-  if current_user
-    Cart.delete(id)
+# 购物车列表 购物车项加一，参数 cart_id
+post "/cart/add/:cart_id" do |env|
+  cart_id = env.params.url["cart_id"].to_i
+  if login?
+    item = Cart.find(id: cart_id)[0]
+    Cart.update(cart_id, number: item.number + 1)
   else
     carts = Array(CartItem).from_json(env.request.cookies["cart_item"].value)
-    carts.map! { |cart| cart.number = cart.number - 1 if cart.id == id; cart }
+    carts.map! do |cart|
+      if cart.id == cart_id
+        cart.number += 1
+      end
+      cart
+    end
+    env.response.cookies << HTTP::Cookie.new("cart_item", carts.to_json)
+  end
+end
+
+# 购物车列表 购物车项减一，参数 cart_id
+post "/cart/delete/:cart_id" do |env|
+  cart_id = env.params.url["cart_id"].to_i
+  if login?
+    item = Cart.find(cart_id)[0]
+    if item.number == 1
+      Cart.delete(cart_id)
+    else
+      Cart.update(item.id, number: item.number - 1)
+    end
+  else
+    carts = Array(CartItem).from_json(env.request.cookies["cart_item"].value)
+    carts.map! { |cart| cart.number = cart.number - 1 if cart.id == cart_id; cart }
     carts.reject! { |cart| cart.number == 0 }
     env.response.cookies << HTTP::Cookie.new("cart_item", carts.to_json)
   end
-  env.redirect "/cart"
 end
 
 get "/cart/clear" do |env|
-  if current_user
+  if login?
     Cart.delete(user_id: current_user)
   else
-    env.response.cookies << HTTP::Cookie.new("cart_item", "")
+    env.response.cookies << HTTP::Cookie.new("cart_item", "", secure: true)
   end
   env.redirect "/cart"
 end
 
+# 商品列表 加入购物车，参数 product_id
 get "/cart/add/:product_id" do |env|
   product_id = env.params.url["product_id"].to_i
   add_cart(env, product_id)
-  redirect_back
 end

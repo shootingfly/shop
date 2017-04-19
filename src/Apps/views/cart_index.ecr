@@ -1,46 +1,67 @@
-<h3 class="mdui-text-center">购物车</h3>
-<div class="mdui-row">
-	<table class="mdui-table mdui-table-hoverable">
-		<thead>
-			<tr>
+<table class="mdui-table mdui-table-hoverable">
+	<thead>
+		<tr>
 			<th>商品</th>
+			<th class="mdui-table-col-numeric">单价</th>
 			<th class="mdui-table-col-numeric">小计</th>
 			<th class="mdui-table-col-numeric">数量&nbsp;&nbsp;&nbsp;&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% products.each_with_index do |product, i| %>
-			<tr>
-				<td><%= product.name %></td>
-				<td><%= carts[i].number * product.price %></td>
-				<td>
-					<a href="/"><i class="mdui-icon material-icons">remove_circle</i></a>
-					<%= carts[i].number %>
-					<a href="/"><i class="mdui-icon mdui-text-color-orange  material-icons">add_circle</i></a>
-				</td>
-				<!-- <td><a href="/cart/delete/<%= carts[i].id %>">删除</a></td> -->
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
-</div>
-<br />
-<li class="mdui-list-item mdui-float-right">
-	实际支付：<h4 class="mdui-text-color-red">36.30</h4>
+		</tr>
+	</thead>
+	<tbody>
+		<% products.each_with_index do |product, i| %>
+		<tr>
+			<td><%= product.name %></td>
+			<td><%= product.price %></td>
+			<td><%= carts[i].number * product.price %></td>
+			<td>
+				<a href="javascript:void(0);" onclick="minus(this, <%= carts[i].id %>, <%= product.price %>)"><i class="mdui-icon material-icons">remove_circle</i></a>
+				<span id="<%= carts[i].id %>"><%= carts[i].number %></span>
+				<a href="javascript:void(0);" onclick="add(this, <%= carts[i].id %>, <%= product.price %>)"><i class="mdui-icon mdui-text-color-orange  material-icons">add_circle</i></a>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+<li class="mdui-list-item mdui-float-left">
+	实际支付：<h4 class="mdui-text-color-red" id="total"><%= total %></h4>
 </li>
-<div class="mdui-row">
-	<form action="/newOrder" method="post" >
-		<ul class="mdui-list mdui-list-dense mdui-col-xs-12 mdui-col-md-6">
-			<li class="mdui-subheader">配送信息</li>
-			<li class="mdui-list-item">配送方式： 蜂鸟专送</li>
-			<li class="mdui-list-item">送达时间： 尽快送出</li>
-			<li class="mdui-divider"></li>
-			<li class="mdui-list-item">联系同学： <input type="text" value="谢 先生" /></li>
-			<li class="mdui-list-item">联系电话： <input type="text" value="15603006662" /></li>
-			<li class="mdui-list-item">收货地址：  <input type="text" value="华南师范大学西区二栋" /></li>
-			<li class="mdui-list-item">支付方式： 在线支付</li>
-		</ul>
-		<input type="hidden" name="id" value="1" />
-		<input type="submit" class="mdui-col-xs-12 mdui-col-md-2 mdui-btn mdui-color-theme mdui-float-right" value="提交订单" autofocus>
-	</form>
-</div>
+<a href="/order/new" class="mdui-btn mdui-btn-block mdui-color-theme">结算</a>
+<script type="text/javascript">
+	function minus(obj, id, price) {
+		$.ajax({
+			type: "POST",
+			url: "/cart/delete/" + id,
+			success: function(data) {
+				var number = $(obj).next();
+				if(number.text() == 1 ) {
+					$(obj).parent().parent().remove();
+				} else {
+					number.text(number.text() - 1);
+					$(obj).parent().prev().text(number.text() * price);
+				}
+				var total = $("#total").text() - price;
+				if(total == 0) {
+					window.location = "/cart";
+				} else {
+					$("#total").text(total);
+				}
+			}
+		})
+	}
+	function add(obj, id, price) {
+		$.ajax({
+			type: "POST",
+			url: "/cart/add/" + id,
+			success: function(data) {
+				// 获取数量
+				var number = $(obj).prev();
+				// 数量+1
+				number.text(parseInt(number.text()) + 1);
+				// 修改小计
+				$(obj).parent().prev().text(number.text() * price);
+				// 修改总计
+				$("#total").text(parseFloat($("#total").text()) + parseFloat(price));
+			}
+		})
+	}
+</script>
