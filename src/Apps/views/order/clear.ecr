@@ -1,0 +1,26 @@
+<% orders.each do |order| %>
+<div class="mdui-card mdui-col-xs-12 mdui-col-md-4">
+  <div class="mdui-card-primary">
+    <div>
+      <%= order.created_at.to_s("%m-%d %H:%M") %>
+      <strong class="mdui-float-right mdui-text-color-red"><%= order.status %></strong>
+    </div>
+  </div>
+  <div class="mdui-divider"></div>
+  <div class="mdui-card-content">
+  <% product_details = Array(ProductDetail).from_json(order.product_detail) %>
+  <% product_details.each do |item| %>
+    <div class="mdui-clearfix">
+      <span class="mdui-float-left"><%= item.name %></span>
+      <span class="mdui-float-right">x<%= item.number %></span>
+    </div>
+  <% end %>
+    <div class="mdui-text-right">共<%= order.quantity %>件商品，实付<span class="mdui-text-color-red">￥<%= order.total %></span></div>
+  </div>
+  <div class="mdui-divider"></div>
+  <div class="mdui-card-actions mdui-float-right">
+    <a href="/order/<%= order.order_no %>" class="mdui-btn mdui-color-theme mdui-ripple">查看订单</a>
+    <a href="/order/delete/<%= order.order_no %>" class="mdui-btn mdui-color-red mdui-ripple">删除</a>
+  </div>
+</div>
+<% end %>

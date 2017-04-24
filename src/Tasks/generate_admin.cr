@@ -1,25 +1,26 @@
 require "admin"
 require "../Models/model"
-auto_admin(all, User, 用户, username: text, password: password, address: text, phone: text)
-auto_admin(all, Cate, 分类, name: text, cate_id: text, show_order: text, icon: text, color: text)
-auto_admin(all, Product, 商品, name: text, price: text, stock: text, sale: text, on_sale: text, cate_id: text)
-auto_admin(index, Order, 订单,
-  user_id: text,          # 用户ID
-  order_no: text,     # 订单号
-  status: text,           # 订单状态
-  product_detail: text,   # 商品信息
-  quantity: text,         # 商品总数
-  total: text,      # 总计
-  shipping: text,          # 配送方式
-  username: text,         # 用户名
-  phone: text,            # 联系电话
-  address: text,          # 配送地址
-  pay_way: text           # 支付方式
+password = gets.as(String)
+exit if password != "123456"
+admin(index, User, 用户, username: 用户名, address: 地址, phone: 电话)
+admin(all, Cate, 分类, name: 分类名, cate_id: 分类ID, show_order: 显示顺序, icon: 图标, color: 颜色)
+admin(all, Product, 商品,
+  name: 商品名,
+  price: 价格,
+  stock: 库存,
+  sale: 销量,
+  on_sale: 销售中,
+  cate_id: 分类ID
 )
-# admin(User, text: [username, address, phone], password: password)
-# admin()
-# auto_admin(all, User, 用户,
-#   text: [username, address, phone],
-#   password: [password],
-#   textarea: [remark]
-# )
+admin(index, Order, 订单,
+  user_id: 用户ID,
+  order_no: 订单号,
+  status: 订单状态,
+  quantity: 商品总数,
+  total: 消费总额,
+  shipping: 配送方式,
+  username: 用户名,
+  phone: 联系电话,
+  address: 配送地址,
+  pay_way: 支付方式
+)

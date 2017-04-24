@@ -36,8 +36,17 @@ macro table(kclass, **names)
 			hash.each do |key, value|
 				sql += " #{key} = '#{value}',"
 			end
-			sql = sql.rchop(',')
-			exec sql
+			exec sql.rchop(',')
+		end
+
+		def self.batch_insert(num : Int32, hash : String, &block)
+			sql = "insert into #{@@table_name} (#{hash}) values "
+			cols = yield
+			s = "'%s'," * num
+			cols.each do |col|
+				sql += ("(#{s.rchop})," % col)
+			end
+			exec sql.rchop(",")
 		end
 
 		def self.update(id : Int32, **hash)
@@ -75,11 +84,10 @@ macro table(kclass, **names)
 			where.each do |key, value|
 				sql += " #{key} = '#{value}' and"
 			end
-			query  sql.rchop("and")
+			query sql.rchop("and")
 		end
 
 		def self.all : Array(self)
-			puts Time.now, "select * from #{@@table_name} "
 			query "select * from #{@@table_name} "
 		end
 
@@ -130,6 +138,14 @@ macro table(kclass, **names)
 			query "select *  from #{@@table_name} " + where + "  order by rand() limit #{num}"
 		end
 
+		def self.order(**hash)
+			sql = "select * from #{@@table_name} order by "
+			hash.each do |k,v|
+				sql += "#{k} #{v},"
+			end
+			query sql.rchop(",")
+		end
+
 		private def self.from_rs(%rs : DB::ResultSet)
 			results = Array(self).new
 			%rs.each do
@@ -154,7 +170,6 @@ macro table(kclass, **names)
 		end
 
 		def self.query(sql : String)
-			puts sql
 			DB.open DB_URL do |db|
 				db.query(sql) do |rs|
 					from_rs(rs)
@@ -163,7 +178,6 @@ macro table(kclass, **names)
 		end
 
 		def self.query_one(sql, hash)
-			puts sql
 			DB.open DB_URL do |db|
 				db.query_one(sql, as: hash)
 			end
@@ -176,7 +190,6 @@ macro table(kclass, **names)
 		end
 
 		def self.exec(sql : String)
-			puts sql
 			DB.open DB_URL do |db|
 				db.exec sql
 			end
@@ -194,15 +207,4 @@ macro table(kclass, **names)
 		}
 
 	end
-	# {{kclass.id}}.create
 end
-# class Object
-#   macro def methods : Array(Symbol)
-#     {{ @type.methods.map { |x| %(:"#{x.name}").id } }}
-#   end
-# end
-# class Array(T)
-# 	macro method_missing(call)
-#   		self[0].{{call.name.id}}
-# 	end
-# end

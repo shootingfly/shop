@@ -5,10 +5,10 @@ end
 
 post "/admin/newUser" do |env|
 	User.insert(				
-	username: env.params.body["username"],	
-	password: env.params.body["password"],	
-	address: env.params.body["address"],	
-	phone: env.params.body["phone"],	
+	username: body["username"],	
+	password: body["password"],	
+	address: body["address"],	
+	phone: body["phone"],	
 	)
 	admin_view "newUser", "添加用户", "添加成功！"
 end

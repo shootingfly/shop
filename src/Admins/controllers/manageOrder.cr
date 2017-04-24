@@ -1,4 +1,4 @@
 get "/admin/manageOrder" do |env|
-	items = Order.all
-	admin_view "manageOrder", "订单管理"
+  items = Order.find(" where status <> '#{Status::Finished}'")
+  admin_view "manageOrder", "订单管理"
 end

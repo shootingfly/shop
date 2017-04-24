@@ -1,15 +1,16 @@
 # 添加分类
 get "/admin/newCate" do |env|
-	admin_view "newCate", "添加分类"
+  admin_view "newCate", "添加分类"
 end
 
 post "/admin/newCate" do |env|
-	Cate.insert(				
-	name: env.params.body["name"],	
-	cate_id: env.params.body["cate_id"],	
-	show_order: env.params.body["show_order"],	
-	icon: env.params.body["icon"],	
-	color: env.params.body["color"],	
-	)
-	admin_view "newCate", "添加分类", "添加成功！"
+  Cate.insert(
+    name: body["name"],
+    cate_id: body["cate_id"],
+    show_order: body["show_order"],
+    icon: body["icon"],
+    color: body["color"],
+  )
+  Const.update_cate
+  admin_view "newCate", "添加分类", "添加成功！"
 end

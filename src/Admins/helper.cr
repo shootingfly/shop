@@ -15,5 +15,5 @@ macro admin_href
 end
 
 macro admin_login?
-  env.session.string?("admin_token")
+  cookie?("admin_token")
 end

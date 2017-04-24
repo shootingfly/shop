@@ -1,0 +1,14 @@
+<%- products.each do |product| -%>
+	<div class="mdui-col-xs-6 mdui-col-md-3" id="<%= product.id %>">
+		<div class="mdui-col-xs-12">
+			<img src="<%= product.image %>" class="img-xs img-md"/>
+		</div>
+		<div class="mdui-col-xs-10">
+			<h4 class="mdui-text-center"><%= product.name %></h4>
+			<h4 class="mdui-text-center mdui-text-color-red">￥ <%= product.price %></h4>
+		</div>
+		<div class="mdui-col-xs-2">
+			<a onclick="add(<%= product.id %>)" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">&#xe145;</i></a>
+		</div>
+	</div>
+<%- end -%>

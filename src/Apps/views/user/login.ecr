@@ -2,16 +2,14 @@
 	<h3 class="mdui-text-center">登录</h3>
 	<form class="" action="/login" method="post">
 		<div class="mdui-textfield mdui-textfield-floating-label">
-			<!-- <i class="mdui-icon material-icons">phone</i> -->
-			  <label class="mdui-textfield-label">手机</label>
-			<input class="mdui-textfield-input" type="phone" name="phone" required autofocus>
+			<label class="mdui-textfield-label">手机</label>
+			<input class="mdui-textfield-input" type="phone" name="phone" pattern="^1[34578]\d{9}$" required autofocus>
 			<div class="mdui-textfield-error">手机号码格式不正确</div>
 		</div>
 		<div class="mdui-textfield mdui-textfield-floating-label">
-			<!-- <i class="mdui-icon material-icons">lock</i> -->
-			  <label class="mdui-textfield-label">密码</label>
-			<input class="mdui-textfield-input" type="password"  name="password"  pattern="^.*(?=.{6,})(?=.*[a-zA-Z]).*$" required>
-			<div class="mdui-textfield-error">密码至少6位</div>
+			<label class="mdui-textfield-label">密码</label>
+			<input class="mdui-textfield-input" type="password"  name="password"  pattern="^.*(?=.{6,})(?=.*[1-9a-zA-Z]).*$" required>
+			<div class="mdui-textfield-error">密码至少6位,由数字及大小写字母组成</div>
 		</div>
 		<div class="mdui-textfield">
 			<input type="submit" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">

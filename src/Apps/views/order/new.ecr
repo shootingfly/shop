@@ -3,8 +3,8 @@
 	<!-- 卡片头部，包含头像、标题、副标题 -->
 	<div class="mdui-card-header">
 		<img class="mdui-card-header-avatar" src="http://q4.qlogo.cn/g?b=qq&nk=790174750&s=100"/>
-		<div class="mdui-card-header-title"><%= username %> <%= address %></div>
-		<div class="mdui-card-header-subtitle"><%= phone %></div>
+		<div class="mdui-card-header-title"><%= data["username"] %> <%= data["address"] %></div>
+		<div class="mdui-card-header-subtitle"><%= data["phone"] %></div>
 	</div>
 </div>
 <h5>订单详情</h5>
@@ -35,9 +35,9 @@
 <h3 class="mdui-text-right mdui-text-color-red"><span class="mdui-text-color-black">实际支付：</span>￥<%= total %></h3>
 <form action="/order/new" method="post">
 	<input type="hidden" name="total" value="<%= total %>" />
-	<input type="hidden" name="username" value="<%= username %>" />
-	<input type="hidden" name="phone" value="<%= phone %>" />
-	<input type="hidden" name="address" value="<%= address %>" />
+	<input type="hidden" name="username" value="<%= data["username"] %>" />
+	<input type="hidden" name="phone" value="<%= data["phone"] %>" />
+	<input type="hidden" name="address" value="<%= data["address"] %>" />
 	<div class="mdui-textfield">
 		<input class="mdui-textfield-input" type="text" name="remark" placeholder="备注"/>
 	</div>
@@ -57,17 +57,17 @@
 	<div>
 		<span>支付方式：</span>
 	  <label class="mdui-radio">
-	    <input type="radio" name="pay_way" value="货到付款"/>
+	    <input type="radio" name="pay_way" value="货到付款" checked/>
 	    <i class="mdui-radio-icon"></i>
 	    货到付款&nbsp;&nbsp;&nbsp;&nbsp;
 	  </label>
 	  <label class="mdui-radio">
-	    <input type="radio" name="pay_way" value="在线支付" checked/>
+	    <input type="radio" name="pay_way" value="在线支付" disabled/>
 	    <i class="mdui-radio-icon"></i>
 	    在线支付
 	  </label>
 	</div>
 	<div class="mdui-textfield">
-		<input class="mdui-btn mdui-btn-block mdui-color-theme" type="submit" value="提交订单"/>
+		<input class="mdui-btn mdui-btn-block mdui-color-theme mdui-ripple" type="submit" value="提交订单"/>
 	</div>
 </form>

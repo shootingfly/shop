@@ -1,19 +1,19 @@
-
-<table class="table table-bordered table-hover datatable">
-	<thead>			
-		<th>username</th>	
-		<th>password</th>	
-		<th>address</th>	
-		<th>phone</th>	
+<div class="table-responsive">
+<table class="table table-bordered table-hover <%= "datatable" unless env.request.headers["User-Agent"] =~ /Mobile/ %>">
+	<thead>
+		<th>用户名</th>
+		<th>密码</th>
+		<th>地址</th>
+		<th>电话</th>
 		<th>操作</th>
 	</thead>
 	<tbody>
 	<% items.each do |item| %>
-		<tr>					
-			<td><%= item.username %></td>	
-			<td><%= item.password %></td>	
-			<td><%= item.address %></td>	
-			<td><%= item.phone %></td>	
+		<tr>
+			<td><%= item.username %></td>
+			<td><%= item.password %></td>
+			<td><%= item.address %></td>
+			<td><%= item.phone %></td>
 			<td>
 				<a href="/admin/editUser/<%= item.id %>" class="btn btn-sm">编辑</a>
 				<a href="/admin/deleteUser/<%= item.id %>" class="btn btn-sm">删除</a>
@@ -22,3 +22,4 @@
 	<% end %>
 	</tbody>
 </table>
+</div>

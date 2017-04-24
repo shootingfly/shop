@@ -8,9 +8,9 @@ end
 SOCKETS = [] of RoomSocket # HTTP::WebSocket
 ID      = [] of Int32
 ws "/chat" do |socket, env|
-  qq = env.params.query["qq"]
-  name = env.params.query["name"]
-  room_id = env.params.query["room_id"].to_i
+  qq = query["qq"]
+  name = query["name"]
+  room_id = query["room_id"].to_i
   file_name = "./public/chat/#{room_id}.txt"
   `touch #{file_name}` unless File.exists?(file_name)
   more = File.read(file_name)
@@ -38,17 +38,17 @@ END
 end
 
 get "/chatform" do |env|
-  view "chat_form", "开房表单"
+  view "chat/form", "聊天室"
 end
 
 post "/chat" do |env|
-  qq = env.params.body["qq"]
-  name = env.params.body["name"]
-  room_id = env.params.body["room_id"]
-  view "chat", "告白小空间"
+  qq = body["qq"]
+  name = body["name"]
+  room_id = body["room_id"]
+  view "chat/chat", "聊天室"
 end
 
 get "/foolish/:room_id" do |env|
-  room_id = env.params.url["room_id"]
-  view "chat_form_auto", "我想对你说"
+  room_id = url["room_id"]
+  view "chat/form_auto", "聊天室"
 end

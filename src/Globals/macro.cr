@@ -1,18 +1,10 @@
 macro view(filename, title)
 	page_title = {{title}}
-	# if env.request.headers["User-Agent"] =~ /Mobile/
-	# 	render "src/Apps/views/#{{{filename}}}.ecr", "src/Layouts/mlayout.ecr"
-	# else
-		render "src/Apps/views/#{{{filename}}}.ecr", "src/Layouts/layout.ecr"
-	# end
+	render "src/Apps/views/#{{{filename}}}.ecr", "src/Layouts/layout.ecr"
 end
 
 macro view(filename)
-	# if env.request.headers["User-Agent"] =~ /Mobile/
-	# 	render "src/Apps/views/#{{{filename}}}.ecr", "src/Layouts/mlayout.ecr"
-	# else
-		render "src/Apps/views/#{{{filename}}}.ecr", "src/Layouts/layout.ecr"
-	# end
+	render "src/Apps/views/#{{{filename}}}.ecr", "src/Layouts/layout.ecr"
 end
 
 macro admin_view(filename, title, flash = "")
@@ -29,10 +21,49 @@ macro redirect_back
 	end
 end
 
+macro body
+	env.params.body
+end
+
+macro url
+	env.params.url
+end
+
+macro query
+	env.params.query
+end
+
+macro json
+	env.params.json
+end
+
+macro redirect(path)
+	env.redirect {{path}}
+end
+
+macro session
+	env.session
+end
+
 macro cookie(string)
 	env.request.cookies[{{string}}].value
 end
 
 macro cookie?(string)
 	env.request.cookies.has_key?({{string}})
+end
+
+class Object
+  macro def methods : Array(Symbol)
+    {{ @type.methods.map { |x| %(:"#{x.name}").id } }}
+  end
+end
+
+module Status
+  Dealing    = "待处理"  # 用户提交订单默认态
+  Dealed     = "已接单"  # 商家接收订单
+  Delivering = "待发货"  #
+  Delivered  = "已发货"  # 商家发出订单
+  Finished   = "订单完成" # 用户收到货
+  Canceled   = "已取消"  # 用户取消订单
 end

@@ -1,21 +1,21 @@
-
-<table class="table table-bordered table-hover datatable">
-	<thead>			
-		<th>name</th>	
-		<th>cate_id</th>	
-		<th>show_order</th>	
-		<th>icon</th>	
-		<th>color</th>	
+<div class="table-responsive">
+	<table class="table table-bordered table-hover <%= "datatable" unless env.request.headers["User-Agent"] =~ /Mobile/ %>">
+	<thead>
+		<th>分类名</th>
+		<th>分类ID</th>
+		<th>显示顺序</th>
+		<th>图标</th>
+		<th>颜色</th>
 		<th>操作</th>
 	</thead>
 	<tbody>
 	<% items.each do |item| %>
-		<tr>					
-			<td><%= item.name %></td>	
-			<td><%= item.cate_id %></td>	
-			<td><%= item.show_order %></td>	
-			<td><%= item.icon %></td>	
-			<td><%= item.color %></td>	
+		<tr>
+			<td><%= item.name %></td>
+			<td><a href="/admin/manageProduct/<%= item.cate_id %>"><%= item.cate_id %></a></td>
+			<td><%= item.show_order %></td>
+			<td><%= item.icon %></td>
+			<td><%= item.color %></td>
 			<td>
 				<a href="/admin/editCate/<%= item.id %>" class="btn btn-sm">编辑</a>
 				<a href="/admin/deleteCate/<%= item.id %>" class="btn btn-sm">删除</a>
@@ -24,3 +24,4 @@
 	<% end %>
 	</tbody>
 </table>
+</div>

@@ -43,16 +43,16 @@ def build_request_options
 end
 
 get "/pay" do |env|
-  # pay_id = env.params.body["pay_id"].to_i
+  # pay_id = body["pay_id"].to_i
   # pay = Payment.find(user_id: current_user, pay_id: pay_id)
   pay_url = "https://mapi.alipay.com/gateway.do?_input_charset=utf-8"
   pay_options = build_request_options
-  view "pay", "确认订单"
+  view "pay/pay", "确认订单"
 end
 
 get "/pay_return" do |env|
-  render "app_home", "zhuye"
+  render "app/home", "zhuye"
 end
 get "/pay_notify" do |env|
-  render "app_home", "zhuye"
+  render "app/home", "zhuye"
 end

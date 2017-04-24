@@ -1,31 +1,28 @@
 get "/root" do |env|
   if admin_login?
-    env.redirect "/admin/home"
+    redirect "/admin/home"
   else
     page_title = "后台登录"
-    flash = ""
+    flash = query["ret"]?
     render "src/Admins/views/adminLogin.ecr"
   end
 end
 
 post "/root" do |env|
-  username = env.params.body["username"]
-  password = env.params.body["password"]
+  username = body["username"]
+  password = body["password"]
   admin = Admin.find(username: username, password: password)
   if admin.size == 0
-    page_title = "后台登录"
-    flash = "登录失败，用户名或密码错误"
-    render "src/Admins/views/adminLogin.ecr"
-    # admin_view "admin_login", "后台登录", flash: "登录失败，用户名或密码错误"
+    redirect "/root?ret=登录失败，用户名或密码错误"
   else
-    env.session.string("admin_token", username)
-    env.redirect "/admin/home"
+    env.response.cookies << HTTP::Cookie.new("admin_token", username, http_only: true)
+    redirect "/admin/home"
   end
 end
 
 get "/admin/logout" do |env|
-  env.session.destroy
-  env.redirect "/root"
+  env.response.cookies << HTTP::Cookie.new("admin_token", "", secure: true)
+  redirect "/root"
 end
 
 before_all "/admin/*" do |env|

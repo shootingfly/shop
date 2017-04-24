@@ -1,38 +1,37 @@
-
-<table class="table table-bordered table-hover datatable">
-	<thead>			
-		<th>user_id</th>	
-		<th>order_no</th>	
-		<th>status</th>	
-		<th>product_detail</th>	
-		<th>quantity</th>	
-		<th>total</th>	
-		<th>shipping</th>	
-		<th>username</th>	
-		<th>phone</th>	
-		<th>address</th>	
-		<th>pay_way</th>	
+<% content_for "meta" do %>
+	<meta http-equiv="refresh" content="12"	/>
+<% end %>
+<div class="table-responsive">
+<table class="table table-bordered table-hover <%= "datatable" unless env.request.headers["User-Agent"] =~ /Mobile/ %>">
+	<thead>
+		<th>订单状态</th>
+		<th>订单号</th>
+		<th>用户ID</th>
+		<th>联系电话</th>
+		<th>联系地址</th>
+		<th>总计</th>
 		<th>操作</th>
 	</thead>
 	<tbody>
 	<% items.each do |item| %>
-		<tr>					
-			<td><%= item.user_id %></td>	
-			<td><%= item.order_no %></td>	
-			<td><%= item.status %></td>	
-			<td><%= item.product_detail %></td>	
-			<td><%= item.quantity %></td>	
-			<td><%= item.total %></td>	
-			<td><%= item.shipping %></td>	
-			<td><%= item.username %></td>	
-			<td><%= item.phone %></td>	
-			<td><%= item.address %></td>	
-			<td><%= item.pay_way %></td>	
+		<tr>
+			<td><%= item.status %></td>
+			<td><a href="/admin/showOrder/<%= item.order_no %>" target="_blank"><%= item.order_no %></a></td>
+			<td><%= item.user_id %></td>
+			<td><%= item.phone %></td>
+			<td><%= item.address %></td>
+			<td><%= item.total %></td>
 			<td>
-				<a href="/admin/editOrder/<%= item.id %>" class="btn btn-sm">编辑</a>
-				<a href="/admin/deleteOrder/<%= item.id %>" class="btn btn-sm">删除</a>
+				<% if item.status == Status::Dealing %>
+					<a href="/admin/dealOrder/<%= item.order_no %>" class="btn btn-sm btn-primary">接单</a>
+				<% elsif item.status == Status::Dealed %>
+					<a href="/admin/deliverOrder/<%= item.order_no %>" class="btn btn-sm btn-info">发货</a>
+				<% else %>
+					<a href="/admin/finishOrder/<%= item.order_no %>" class="btn btn-sm btn-danger">完成</a>
+				<% end %>
 			</td>
 		</tr>
 	<% end %>
 	</tbody>
 </table>
+</div>

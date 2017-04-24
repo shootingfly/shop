@@ -1,4 +1,4 @@
-macro auto_admin(action, klass, chinese, **hash)
+macro admin(action, klass, chinese, **hash)
 
 	{{action}}{{klass}}
 
@@ -8,9 +8,9 @@ macro auto_admin(action, klass, chinese, **hash)
 <form class="form-horizontal" action="/admin/new{{klass}}" method="post">
 	{% for key, value in hash %}
 	<div class="form-group">
-		<label class="control-label col-sm-4">{{key}}</label>
+		<label class="control-label col-sm-4">{{value}}</label>
 		<div class="col-sm-4">
-			<input class="form-control" type="{{value}}" name="{{key}}" placeholder="{{key}}" required>
+			<input class="form-control" type="text" name="{{key}}" placeholder="{{key}}" required>
 		</div>
 	</div>
 	{% end %}
@@ -29,7 +29,7 @@ macro auto_admin(action, klass, chinese, **hash)
 
 		post "/admin/new{{klass}}" do |env|
 			{{klass}}.insert(				{% for key, value in hash %}
-			{{key}}: env.params.body["{{key}}"],	{% end %}
+			{{key}}: body["{{key}}"],	{% end %}
 			)
 			admin_view "new{{klass}}", "添加{{chinese}}", "添加成功！"
 		end
@@ -45,9 +45,9 @@ macro auto_admin(action, klass, chinese, **hash)
 <form class="form-horizontal" action="/admin/edit{{klass}}/<%= item.id %>"  method="post">
 	{% for key, value in hash %}
 	<div class="form-group">
-		<label class="control-label col-sm-4">{{key}}</label>
+		<label class="control-label col-sm-4">{{value}}</label>
 		<div class="col-sm-4">
-			<input class="form-control" type="{{value}}" name="{{key}}" value="<%= item.{{key}} %>" placeholder="{{key}}" require>
+			<input class="form-control" type="text" name="{{key}}" value="<%= item.{{key}} %>" placeholder="{{key}}" required>
 		</div>
 	</div>
 	{% end %}
@@ -62,15 +62,15 @@ macro auto_admin(action, klass, chinese, **hash)
 		controller_string =<<-EOF
 		# 编辑{{chinese}}
 		get "/admin/edit{{klass}}/:id" do |env|
-			id = env.params.url["id"].to_i
+			id = url["id"].to_i
 			item = {{klass}}.find(id)[0]
 			admin_view "edit{{klass}}", "编辑{{chinese}}"
 		end
 
 		post "/admin/edit{{klass}}/:id" do |env|
-			id = env.params.url["id"].to_i
+			id = url["id"].to_i
 			if {{klass}}.update(id,				{% for key, value in hash %}
-				{{key}}: env.params.body["{{key}}"],	{% end %}
+				{{key}}: body["{{key}}"],	{% end %}
 			)
 				env.redirect "/admin/manage{{klass}}"
 			else
@@ -86,7 +86,7 @@ macro auto_admin(action, klass, chinese, **hash)
 	def delete{{klass}}
 		controller_string =<<-EOF
 		get "/admin/delete{{klass}}/:id" do |env|
-			id = env.params.url["id"].to_i
+			id = url["id"].to_i
 			{{klass}}.delete(id)
 			redirect_back
 		end
@@ -100,7 +100,7 @@ macro auto_admin(action, klass, chinese, **hash)
 %(
 <table class="table table-bordered table-hover datatable">
 	<thead>			{% for key, value in hash %}
-		<th>{{key}}</th>	{% end %}
+		<th>{{value}}</th>	{% end %}
 		<th>操作</th>
 	</thead>
 	<tbody>

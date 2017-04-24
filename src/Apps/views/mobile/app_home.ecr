@@ -11,18 +11,32 @@
   </a>
   <%- end -%>
 </div>
-<p class="mdui-text-center mdui-color-theme-accent">24小时热销</p>
-<%- Product.find(cate_id: "server").each do |product| -%>
-	<div class="mdui-col-xs-6 mdui-col-md-3" id="<%= product.id %>">
-		<div class="mdui-col-xs-12">
-			<img alt="最后幸存者" src="/image/1.jpg" class="img-xs img-md"/>
-		</div>
-		<div class="mdui-col-xs-10">
-			<h4 class="mdui-text-center"><%= product.name %></h4>
-			<h4 class="mdui-text-center mdui-color-red">$ <%= product.price %></h4>
-		</div>
-		<div class="mdui-col-xs-2">
-			<a onclick="add(<%= product.id %>)" class="mdui-btn mdui-btn-icon mdui-color-theme-accent "><i class="mdui-icon material-icons">add</i></a>
-		</div>
-	</div>
+<h3 class="mdui-text-center mdui-text-color-red">24小时热销</h3>
+<%- Product.find(cate_id: Const.cate[0].cate_id).each do |product| -%>
+<div class="mdui-col-xs-6 mdui-col-md-3" id="<%= product.id %>">
+  <div class="mdui-col-xs-12">
+    <img src="<%= product.image %>" class="img-xs img-md"/>
+  </div>
+  <div class="mdui-col-xs-10">
+    <h4 class="mdui-text-center"><%= product.name %></h4>
+    <h4 class="mdui-text-center mdui-text-color-red">￥ <%= product.price %></h4>
+  </div>
+  <div class="mdui-col-xs-2">
+    <a onclick="add(<%= product.id %>)" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">&#xe145;</i></a>
+  </div>
+</div>
+<%- end -%>
+<%- Product.find(cate_id: Const.cate[1].cate_id).each do |product| -%>
+<div class="mdui-col-xs-6 mdui-col-md-3" id="<%= product.id %>">
+  <div class="mdui-col-xs-12">
+    <img src="<%= product.image %>" class="img-xs img-md"/>
+  </div>
+  <div class="mdui-col-xs-10">
+    <h4 class="mdui-text-center"><%= product.name %></h4>
+    <h4 class="mdui-text-center mdui-text-color-red">￥ <%= product.price %></h4>
+  </div>
+  <div class="mdui-col-xs-2">
+    <a onclick="add(<%= product.id %>)" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">&#xe145;</i></a>
+  </div>
+</div>
 <%- end -%>

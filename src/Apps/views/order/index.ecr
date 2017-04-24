@@ -1,7 +1,10 @@
 <% orders.each do |order| %>
 <div class="mdui-card mdui-col-xs-12 mdui-col-md-4">
   <div class="mdui-card-primary">
-    <div class="mdui-card-primary-subtitle"><%= order.created_at.to_s("%m-%d %H:%M") %></div>
+    <div>
+      <%= order.created_at.to_s("%m-%d %H:%M") %>
+      <strong class="mdui-float-right mdui-text-color-red"><%= order.status %></strong>
+    </div>
   </div>
   <div class="mdui-divider"></div>
   <div class="mdui-card-content">
@@ -17,7 +20,7 @@
   <div class="mdui-divider"></div>
   <div class="mdui-card-actions mdui-float-right">
     <a href="/order/<%= order.order_no %>" class="mdui-btn mdui-color-theme mdui-ripple">查看订单</a>
-    <a href="/order/new" class="mdui-btn mdui-color-theme mdui-ripple">再来一单</a>
+    <!-- <a href="/order/new" class="mdui-btn mdui-color-theme mdui-ripple">再来一单</a> -->
     <!-- <a href="/order/delete/<%= order.order_no %>" class="mdui-btn mdui-ripple">删除</a> -->
   </div>
 </div>

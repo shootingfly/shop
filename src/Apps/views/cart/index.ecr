@@ -2,7 +2,7 @@
 	<thead>
 		<tr>
 			<th>商品</th>
-			<th class="mdui-table-col-numeric">单价</th>
+			<!-- <th class="mdui-table-col-numeric">单价</th> -->
 			<th class="mdui-table-col-numeric">小计</th>
 			<th class="mdui-table-col-numeric">数量&nbsp;&nbsp;&nbsp;&nbsp;</th>
 		</tr>
@@ -11,7 +11,6 @@
 		<% products.each_with_index do |product, i| %>
 		<tr>
 			<td><%= product.name %></td>
-			<td><%= product.price %></td>
 			<td><%= carts[i].number * product.price %></td>
 			<td>
 				<a href="javascript:void(0);" onclick="minus(this, <%= carts[i].id %>, <%= product.price %>)"><i class="mdui-icon material-icons">remove_circle</i></a>
@@ -25,7 +24,7 @@
 <li class="mdui-list-item mdui-float-left">
 	实际支付：<h4 class="mdui-text-color-red" id="total"><%= total %></h4>
 </li>
-<a href="/order/new" class="mdui-btn mdui-btn-block mdui-color-theme">结算</a>
+<a href="/order/new" class="mdui-btn mdui-btn-block mdui-color-theme mdui-ripple">结算</a>
 <script type="text/javascript">
 	function minus(obj, id, price) {
 		$.ajax({

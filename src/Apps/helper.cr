@@ -1,5 +1,12 @@
 macro login?
-	env.request.cookies.has_key?("auth_token")
+	cookie?("auth_token")
+end
+
+macro do_login!
+	unless login?
+		env.redirect "/login"
+		halt(env, 302)
+	end
 end
 
 macro current
@@ -9,14 +16,6 @@ end
 macro current_user
 	User.find(token: cookie("auth_token"))[0].as(User).id
 end
-
-# macro current
-# 	user = nil
-# 	if env.request.cookies["auth_token"]?
-# 		user = User.find(token: env.request.cookies["auth_token"].value)[0]?
-# 	end
-# 	user
-# end
 
 macro active?(url)
 	"mdui-list-item-active" if env.request.path == {{url}}

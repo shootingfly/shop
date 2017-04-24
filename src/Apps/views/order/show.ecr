@@ -1,0 +1,46 @@
+<% width = case order.status when Status::Dealing then "25" when Status::Dealed then "50" when Status::Delivered then "75" else "100" end %>
+<div class="mdui-progress">
+  <div class="mdui-progress-determinate" style="width: <%= width %>%;"></div>
+</div>
+<ul class="mdui-list mdui-col-xs-12 mdui-col-md-6">
+	<li class="mdui-list-item">
+		<table class="mdui-table">
+			<thead>
+				<tr>
+					<th>商品</th>
+					<th class="mdui-table-col-numeric">数量</th>
+					<th class="mdui-table-col-numeric">小计( 元 )</th>
+				</tr>
+			</thead>
+			<tbody>
+        <% product_details.each do |pd| %>
+				<tr>
+					<td><%= pd.name %></td>
+					<td><%= pd.number %></td>
+					<td><%= pd.price %></td>
+				</tr>
+				<% end %>
+				<tr>
+					<td colspan="2">在线支付立减优惠</td>
+					<td>25</td>
+				</tr>
+			</tbody>
+		</table>
+	</li>
+	<li class="mdui-list-item mdui-float-right">
+		实际支付：<h4 class="mdui-text-color-red"><%= order.total %></h4>
+	</li>
+</ul>
+<ul class="mdui-list mdui-list-dense mdui-col-xs-12 mdui-col-md-6">
+	<li class="mdui-subheader">配送信息</li>
+	<li class="mdui-list-item">配送方式： 蜂鸟专送</li>
+	<li class="mdui-list-item">送达时间： 尽快送出</li>
+	<li class="mdui-divider"></li>
+	<li class="mdui-list-item">联  系  人： <%= order.username %></li>
+	<li class="mdui-list-item">联系电话： <%= order.phone %></li>
+	<li class="mdui-list-item">收货地址： <%= order.address %></li>
+	<li class="mdui-subheader">订单信息</li>
+	<li class="mdui-list-item">订单号码： <%= order.order_no %></li>
+	<li class="mdui-list-item">订单时间： <%= order.created_at %></li>
+	<li class="mdui-list-item">支付方式： <%= order.pay_way %></li>
+</ul>

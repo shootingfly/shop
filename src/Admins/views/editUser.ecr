@@ -2,35 +2,35 @@
 <form class="form-horizontal" action="/admin/editUser/<%= item.id %>"  method="post">
 	
 	<div class="form-group">
-		<label class="control-label col-sm-4">username</label>
-		<div class="col-sm-4">
-			<input class="form-control" type="text" name="username" value="<%= item.username %>" placeholder="username" require>
+		<label class="control-label col-xs-12 col-sm-4">用户名</label>
+		<div class="col-xs-12 col-sm-4">
+			<input class="form-control" type="text" name="username" value="<%= item.username %>" placeholder="username" required>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="control-label col-sm-4">password</label>
-		<div class="col-sm-4">
-			<input class="form-control" type="password" name="password" value="<%= item.password %>" placeholder="password" require>
+		<label class="control-label col-xs-12 col-sm-4">密码</label>
+		<div class="col-xs-12 col-sm-4">
+			<input class="form-control" type="text" name="password" value="<%= item.password %>" placeholder="password" required>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="control-label col-sm-4">address</label>
-		<div class="col-sm-4">
-			<input class="form-control" type="text" name="address" value="<%= item.address %>" placeholder="address" require>
+		<label class="control-label col-xs-12 col-sm-4">地址</label>
+		<div class="col-xs-12 col-sm-4">
+			<input class="form-control" type="text" name="address" value="<%= item.address %>" placeholder="address" required>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<label class="control-label col-sm-4">phone</label>
-		<div class="col-sm-4">
-			<input class="form-control" type="text" name="phone" value="<%= item.phone %>" placeholder="phone" require>
+		<label class="control-label col-xs-12 col-sm-4">电话</label>
+		<div class="col-xs-12 col-sm-4">
+			<input class="form-control" type="text" name="phone" value="<%= item.phone %>" placeholder="phone" required>
 		</div>
 	</div>
 	
 	<div class="form-group">
-		<div class="col-sm-4 col-sm-offset-4">
+		<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 			<input type="submit" value="提交" class="form-control btn btn-primary">
 		</div>
 	</div>

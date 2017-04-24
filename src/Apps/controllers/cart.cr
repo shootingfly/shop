@@ -35,15 +35,15 @@ get "/cart" do |env|
     products.size.times do |i|
       total += carts[i].number * products[i].price
     end
-    view("cart_index", "购物车")
+    view("cart/index", "购物车")
   else
-    view("cart_empty", "空的购物车")
+    view("cart/empty", "空的购物车")
   end
 end
 
 # 购物车列表 购物车项加一，参数 cart_id
 post "/cart/add/:cart_id" do |env|
-  cart_id = env.params.url["cart_id"].to_i
+  cart_id = url["cart_id"].to_i
   if login?
     item = Cart.find(id: cart_id)[0]
     Cart.update(cart_id, number: item.number + 1)
@@ -61,7 +61,7 @@ end
 
 # 购物车列表 购物车项减一，参数 cart_id
 post "/cart/delete/:cart_id" do |env|
-  cart_id = env.params.url["cart_id"].to_i
+  cart_id = url["cart_id"].to_i
   if login?
     item = Cart.find(cart_id)[0]
     if item.number == 1
@@ -88,6 +88,6 @@ end
 
 # 商品列表 加入购物车，参数 product_id
 get "/cart/add/:product_id" do |env|
-  product_id = env.params.url["product_id"].to_i
+  product_id = url["product_id"].to_i
   add_cart(env, product_id)
 end

@@ -1,0 +1,24 @@
+<div class="mdui-divider"> </div>
+<div class="mdui-tab">
+  <%- Const.cate.each do |cate| -%>
+  <a class="mdui-ripple  mdui-tab-active <%= active?("/product/#{cate.cate_id}") %>" href="/product/<%= cate.cate_id %>" >
+    <i class="mdui-icon material-icons mdui-text-color-<%= cate.color %>"><%= cate.icon %></i>
+    <label><%= cate.name %></label>
+  </a>
+  <%- end -%>
+</div>
+<h4 class="mdui-text-center">猜您喜欢</h4>
+<%- Product.rand(10).each do |product| -%>
+	<div class="mdui-col-xs-6 mdui-col-md-3" id="<%= product.id %>">
+		<div class="mdui-col-xs-12">
+			<img src="<%= product.image %>" class="img-xs img-md"/>
+		</div>
+		<div class="mdui-col-xs-10">
+			<h4 class="mdui-text-center"><%= product.name %></h4>
+			<h4 class="mdui-text-center mdui-text-color-red">￥ <%= product.price %></h4>
+		</div>
+		<div class="mdui-col-xs-2">
+			<a onclick="add(<%= product.id %>)" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"><i class="mdui-icon material-icons">&#xe145;</i></a>
+		</div>
+	</div>
+<%- end -%>

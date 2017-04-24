@@ -1,14 +1,19 @@
 get "/product/:cate_id" do |env|
-  cate_id = env.params.url["cate_id"]
+  cate_id = url["cate_id"]
   cate = Cate.find(cate_id: cate_id)[0]
   products = Product.find(cate_id: cate_id)
   page_title = cate.name
-  view "product_index"
+  view "product/index"
 end
 
 post "/product/search" do |env|
-  name = env.params.body["name"]
-  page_title = "搜索结果"
+  name = body["name"]
   products = Product.query("select * from Product where name like '%#{name}%'")
-  view "product_index"
+  if products.any?
+    page_title = "搜索结果"
+    view "product/index"
+  else
+    page_title = "找不到哦"
+    view "product/empty"
+  end
 end

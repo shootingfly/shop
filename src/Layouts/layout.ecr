@@ -9,7 +9,9 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="format-detection" content="telephone=no">
-	<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=no">
+	<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0, maximum-scale=1, user-scalable=0">
+	<link rel='icon' type='image/png' href='/favicon.png'>
+  <!-- <link href='/favicon/favicon.ico' rel='icon' type='image/x-icon'> -->
 	<link rel="stylesheet" type="text/css" href="/mdui/css/mdui.css">
 	<script src="/mdui/js/mdui.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -21,11 +23,13 @@
 <body class="mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-indigo mdui-theme-accent-pink">
 	<header class="mdui-appbar mdui-appbar-fixed">
 		<div class="mdui-toolbar mdui-color-theme">
-			<span class="mdui-btn mdui-btn-icon mdui-rippler mdui-ripple-white" mdui-drawer="{target: '#main-drawer'}"><i class="mdui-icon material-icons">&#xe5d2;</i></span>
+			<span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-drawer="{target: '#left-drawer'}">
+				<i class="mdui-icon material-icons">menu</i>
+			</span>
 			<span class="mdui-typo-title mdui-center"><%= page_title %></span>
 			<%- if login? -%>
 			<div class="mdui-float-right">
-				<span class="mdui-btn mdui-btn-icon mdui-rippler mdui-ripple-white" mdui-drawer="{target: '#right-drawer'}">
+				<span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-drawer="{target: '#right-drawer'}">
 					<i class="mdui-icon material-icons">more_vert</i>
 				</span>
 			</div>
@@ -36,10 +40,10 @@
 			<%- end -%>
 		</div>
 	</header>
-	<div class="mdui-drawer mdui-drawer-show" id="main-drawer">
+	<div class="mdui-drawer mdui-drawer-show" id="left-drawer">
 		<div class="mdui-list">
-			<a class="mdui-list-item mdui-rippler <%= active?("/") %>" href="/">
-				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-yellow">home</i>
+			<a class="mdui-list-item mdui-ripple <%= active?("/") %>" href="/">
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
 				<span class="mdui-list-item-content">首页</span>
 			</a>
 			<%- Const.cate.each do |cate| -%>
@@ -49,7 +53,7 @@
 			</a>
 			<%- end -%>
 			<li class="mdui-list-item  mdui-ripple">
-				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-yellow">search</i>
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">search</i>
 				<form action="/product/search" method="post">
 						<div class="mdui-textfield mdui-list-item-content">
 							<input type="text" class="mdui-textfield-input" name="name" />
@@ -68,10 +72,18 @@
 				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-theme-accent">shopping_cart</i>
 				<span class="mdui-list-item-content">购物车</span>
 			</a>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/chatform") %>" href="/chatform" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-green">chat</i>
+				<span class="mdui-list-item-content">聊天室</span>
+			</a>
 			<div class="mdui-divider"></div>
 			<a class="mdui-list-item  mdui-ripple  <%= active?("/cart/clear") %>" href="/cart/clear" >
 				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-red">remove_shopping_cart</i>
 				<span class="mdui-list-item-content">清空购物车</span>
+			</a>
+			<a class="mdui-list-item  mdui-ripple  <%= active?("/order/clear") %>" href="/order/clear" >
+				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-red">delete</i>
+				<span class="mdui-list-item-content">删除订单</span>
 			</a>
 			<a class="mdui-list-item  mdui-ripple  <%= active?("/logout") %>" href="/logout" >
 				<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-red">power_settings_new</i>
@@ -85,9 +97,6 @@
 				<%= content %>
 		</div>
 	</div>
-	<a class="mdui-fab mdui-fab-fixed mdui-color-theme-accent" href="/cart" id="end"><i class="mdui-icon material-icons">shopping_cart</i></a>
-	<script type="text/javascript">
-		// $("#main-drawer").addClass("mdui-drawer-close");
-	</script>`
+	<a class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent" href="/cart" id="end"><i class="mdui-icon material-icons">&#xe8cc;</i></a>
 </body>
 </html>

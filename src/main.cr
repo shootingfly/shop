@@ -9,4 +9,6 @@ require "./Apps/controllers/*"
 require "./Admins/helper"
 require "./Admins/controllers/*"
 
-Kemal.run
+Kemal.config.env = "production"
+
+Kemal.run(80)

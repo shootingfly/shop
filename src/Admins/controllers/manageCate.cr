@@ -1,4 +1,4 @@
 get "/admin/manageCate" do |env|
-	items = Cate.all
-	admin_view "manageCate", "分类管理"
+  items = Cate.order(show_order: "asc")
+  admin_view "manageCate", "分类管理"
 end

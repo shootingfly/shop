@@ -7,7 +7,7 @@ require "../Models/model"
 Admin.create
 User.create
 Cate.create
-Product.create
+Product.create(drop?: true)
 Cart.create
 Order.create(drop?: true)
 # OrderItem.create(drop?: true)
